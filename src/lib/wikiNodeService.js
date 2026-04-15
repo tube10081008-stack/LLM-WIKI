@@ -348,6 +348,63 @@ export async function fetchGitStatus() {
   };
 }
 
+export async function fetchRebuildPlan() {
+  const response = await fetch('/api/migration', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'plan' }),
+  });
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(data?.error ?? 'Rebuild plan could not be loaded.');
+  }
+
+  return {
+    plan: data?.plan ?? null,
+    reflection: data?.reflection ?? [],
+    integrity: data?.integrity ?? null,
+  };
+}
+
+export async function executeRebuild(trigger) {
+  const response = await fetch('/api/migration', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'rebuild', trigger: trigger || 'manual' }),
+  });
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(data?.error ?? 'Rebuild could not be executed.');
+  }
+
+  return {
+    rebuild: data?.rebuild ?? null,
+    reflection: data?.reflection ?? [],
+    integrity: data?.integrity ?? null,
+  };
+}
+
+export async function fetchMigrationStatus() {
+  const response = await fetch('/api/migration', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'status' }),
+  });
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(data?.error ?? 'Migration status could not be loaded.');
+  }
+
+  return {
+    manifest: data?.manifest ?? null,
+    reflection: data?.reflection ?? [],
+    integrity: data?.integrity ?? null,
+  };
+}
+
 export function buildKnowledgeUserPrompt({
   knowledgeType,
   rawText,

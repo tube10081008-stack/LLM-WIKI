@@ -24,6 +24,8 @@ import {
   applyKnowledgeProposal,
   createAttachmentId,
   executeGitCheckpoint,
+  executeRebuild,
+  fetchRebuildPlan,
   fetchWorkspaceIntegrity,
   fetchWorkspaceNode,
   fetchWorkspaceSnapshot,
@@ -1290,6 +1292,13 @@ function WorkspaceSectionView({
         >
           <GitReadinessCard git={workspaceSnapshot?.git} />
         </SectionCard>
+
+        <SectionCard
+          title="Migration & Rebuild"
+          description="Step 9 — schema migrations, rebuild plans, and diff-based regeneration."
+        >
+          <RebuildCard />
+        </SectionCard>
       </div>
     </SectionShell>
   );
@@ -1979,6 +1988,130 @@ function GitReadinessCard({ git }) {
             {pushStatus.pushed ? '✅ Pushed' : '⚠️ Push failed'}
           </p>
           <p className="mt-1">{pushStatus.message}</p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function RebuildCard() {
+  const [plan, setPlan] = useState(null);
+  const [planLoading, setPlanLoading] = useState(false);
+  const [rebuildResult, setRebuildResult] = useState(null);
+  const [rebuildLoading, setRebuildLoading] = useState(false);
+
+  const handleFetchPlan = async () => {
+    setPlanLoading(true);
+    setPlan(null);
+    try {
+      const result = await fetchRebuildPlan();
+      setPlan(result.plan);
+    } catch (error) {
+      setPlan({ can_rebuild: false, message: error.message });
+    } finally {
+      setPlanLoading(false);
+    }
+  };
+
+  const handleRebuild = async () => {
+    setRebuildLoading(true);
+    setRebuildResult(null);
+    try {
+      const result = await executeRebuild('manual');
+      setRebuildResult(result.rebuild);
+    } catch (error) {
+      setRebuildResult({ executed: false, message: error.message });
+    } finally {
+      setRebuildLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-3">
+        <button
+          type="button"
+          id="rebuild-plan-btn"
+          disabled={planLoading}
+          onClick={handleFetchPlan}
+          className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {planLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <AlertCircle className="h-4 w-4" />
+          )}
+          Scan Plan
+        </button>
+        <button
+          type="button"
+          id="rebuild-execute-btn"
+          disabled={rebuildLoading || (!plan?.can_rebuild && plan !== null)}
+          onClick={handleRebuild}
+          className="inline-flex items-center gap-2 rounded-full bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-violet-600/20 transition-all hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {rebuildLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Sparkles className="h-4 w-4" />
+          )}
+          Rebuild
+        </button>
+      </div>
+
+      {plan ? (
+        <div className="rounded-[22px] border border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-6">
+          <p className="font-semibold text-slate-900">{plan.message}</p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            <MetaLine label="Wiki nodes">{plan.total_wiki_nodes ?? 0}</MetaLine>
+            <MetaLine label="Need rebuild">{plan.rebuild_count ?? 0}</MetaLine>
+            <MetaLine label="Raw sources">{plan.total_raw_sources ?? 0}</MetaLine>
+          </div>
+          {plan.needs_rebuild?.length > 0 ? (
+            <div className="mt-3 space-y-2">
+              {plan.needs_rebuild.slice(0, 5).map((node) => (
+                <div
+                  key={node.path}
+                  className="rounded-[18px] border border-amber-200 bg-amber-50 px-3 py-2"
+                >
+                  <p className="text-xs font-semibold text-amber-800">{node.path}</p>
+                  <p className="mt-1 text-xs text-amber-700">
+                    {node.rebuild_reasons?.join(', ')}
+                  </p>
+                </div>
+              ))}
+              {plan.needs_rebuild.length > 5 ? (
+                <p className="text-xs text-slate-500">
+                  +{plan.needs_rebuild.length - 5} more nodes need rebuild.
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      ) : (
+        <EmptySectionMessage
+          title="No rebuild plan loaded"
+          description="Click 'Scan Plan' to analyze wiki nodes for rebuild needs."
+        />
+      )}
+
+      {rebuildResult ? (
+        <div
+          className={`rounded-[22px] border px-4 py-3 text-sm leading-6 ${
+            rebuildResult.executed
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
+              : 'border-amber-200 bg-amber-50 text-amber-800'
+          }`}
+        >
+          <p className="font-semibold">
+            {rebuildResult.executed ? '✅ Rebuild complete' : '⚠️ Rebuild skipped'}
+          </p>
+          <p className="mt-1">{rebuildResult.message}</p>
+          {rebuildResult.nodes_rebuilt > 0 ? (
+            <p className="mt-1 text-xs">
+              {rebuildResult.nodes_rebuilt} rebuilt, {rebuildResult.nodes_skipped} skipped
+            </p>
+          ) : null}
         </div>
       ) : null}
     </div>

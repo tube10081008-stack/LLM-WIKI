@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "bundle_version": 2,
+  "bundle_version": 3,
   "updated_at": "2026-04-15",
   "canonical_artifacts": [
     {
@@ -44,6 +44,11 @@
       "name": "GraphCache",
       "schema": "contracts/graph-cache.schema.json",
       "storage_root": "20_Meta/"
+    },
+    {
+      "name": "MigrationManifest",
+      "schema": "contracts/migration-manifest.schema.json",
+      "storage_root": "30_Ops/"
     }
   ]
 }

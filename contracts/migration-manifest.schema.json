@@ -1,0 +1,137 @@
+{
+  "$id": "https://llm-wiki.local/contracts/migration-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MigrationManifest",
+  "description": "Tracks schema version transitions and migration execution state for the rebuild system.",
+  "type": "object",
+  "required": ["schema_version", "migrations"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Current schema version of the entire knowledge base."
+    },
+    "migrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["migration_id", "from_version", "to_version", "status", "created_at"],
+        "properties": {
+          "migration_id": {
+            "type": "string",
+            "pattern": "^mig_[a-z0-9_]+$",
+            "description": "Unique migration identifier."
+          },
+          "from_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "to_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "running", "completed", "failed", "rolled_back"]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completed_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+          },
+          "affected_nodes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of wiki nodes affected by this migration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of what this migration does."
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["field", "action"],
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "description": "The schema field being modified."
+                },
+                "action": {
+                  "type": "string",
+                  "enum": ["add", "remove", "rename", "retype", "revalidate"],
+                  "description": "What type of change is applied to the field."
+                },
+                "from": {
+                  "type": "string",
+                  "description": "Previous value or type (for rename/retype)."
+                },
+                "to": {
+                  "type": "string",
+                  "description": "New value or type (for rename/retype)."
+                }
+              }
+            }
+          },
+          "error": {
+            "type": ["string", "null"],
+            "description": "Error message if migration failed."
+          }
+        }
+      }
+    },
+    "rebuild_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rebuild_id", "trigger", "status", "started_at"],
+        "properties": {
+          "rebuild_id": {
+            "type": "string",
+            "pattern": "^rebuild_[a-z0-9_]+$"
+          },
+          "trigger": {
+            "type": "string",
+            "enum": ["migration", "policy_change", "template_update", "manual"],
+            "description": "What caused this rebuild."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["queued", "running", "completed", "failed", "cancelled"]
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completed_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+          },
+          "nodes_scanned": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "nodes_rebuilt": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "nodes_skipped": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "policy_version_used": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "error": {
+            "type": ["string", "null"]
+          }
+        }
+      }
+    }
+  }
+}

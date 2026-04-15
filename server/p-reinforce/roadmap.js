@@ -152,11 +152,11 @@ function buildProgressState({ contractHealth, storage, gitReady }) {
   return {
     currentPosition: storage.durable
       ? gitReady
-        ? 'Step 8 active -> validating Git checkpoints'
+        ? 'Step 9 active -> designing rebuild and migration safety'
         : 'Step 7 complete -> entering Step 8'
       : 'Step 4 blocked -> Steps 5 and 6 await durable runtime',
-    currentStepId: storage.durable ? (gitReady ? 'step8' : 'step7') : 'step4',
-    nextStepId: storage.durable ? (gitReady ? 'step9' : 'step8') : 'step5',
+    currentStepId: storage.durable ? (gitReady ? 'step9' : 'step7') : 'step4',
+    nextStepId: storage.durable ? (gitReady ? 'step10' : 'step8') : 'step5',
     stepStatuses: [
       { id: 'step0', label: findStep('step0').label, status: 'Contracted' },
       { id: 'step1', label: findStep('step1').label, status: 'Implemented' },
@@ -185,9 +185,13 @@ function buildProgressState({ contractHealth, storage, gitReady }) {
       {
         id: 'step8',
         label: findStep('step8').label,
-        status: storage.durable ? (gitReady ? 'In design' : 'Blocked') : 'Not started',
+        status: storage.durable ? (gitReady ? 'Implemented' : 'Blocked') : 'Not started',
       },
-      { id: 'step9', label: findStep('step9').label, status: 'Not started' },
+      {
+        id: 'step9',
+        label: findStep('step9').label,
+        status: storage.durable && gitReady ? 'In design' : 'Not started',
+      },
       { id: 'step10', label: findStep('step10').label, status: 'Not started' },
     ],
   };
