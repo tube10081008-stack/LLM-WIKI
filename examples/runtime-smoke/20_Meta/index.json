@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-15T07:03:48.592Z",
+  "node_count": 2,
+  "entries": [
+    {
+      "node_id": "node_topic_agent-queue-seed",
+      "title": "Agent Queue Seed",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Research/agent-queue-seed.md",
+      "status": "draft",
+      "updated_at": "2026-04-15",
+      "source_ref_count": 1,
+      "summary": "A new queued raw note about building a local queue worker that consumes immutable raw sources and writes durable wiki nodes."
+    },
+    {
+      "node_id": "node_topic_persistent-wiki-contracts",
+      "title": "Persistent Wiki Contracts",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Research/persistent-wiki-contracts.md",
+      "status": "draft",
+      "updated_at": "2026-04-15",
+      "source_ref_count": 1,
+      "summary": "원본과 파생 지식을 분리해야 장기 위키가 무너지지 않는다."
+    }
+  ]
+}

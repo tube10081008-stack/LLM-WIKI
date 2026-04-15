@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p-reinforce.local/contracts/agent-status.schema.json",
+  "title": "AgentStatus",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "updated_at",
+    "state",
+    "watch_root",
+    "queue_depth"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "watching",
+        "scanning",
+        "error"
+      ]
+    },
+    "watch_root": {
+      "type": "string",
+      "pattern": "^00_Raw/?$"
+    },
+    "queue_depth": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "last_scan_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "last_event_summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "watch_mode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "manual",
+        "watch",
+        null
+      ]
+    }
+  }
+}

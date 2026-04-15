@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p-reinforce.local/contracts/index-json.schema.json",
+  "title": "IndexJson",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "node_count",
+    "entries"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "node_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "node_id",
+          "title",
+          "node_type",
+          "path",
+          "status",
+          "updated_at",
+          "source_ref_count"
+        ],
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "pattern": "^node_[a-z0-9]+(?:_[a-z0-9-]+)+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "node_type": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^10_Wiki/.+\\.md$"
+          },
+          "status": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "source_ref_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "summary": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

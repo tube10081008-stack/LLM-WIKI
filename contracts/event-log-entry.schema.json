@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p-reinforce.local/contracts/event-log-entry.schema.json",
+  "title": "EventLogEntry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "timestamp",
+    "event_type",
+    "policy_version",
+    "summary"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt_[0-9]{8}_[0-9]{6}_[a-z0-9]{4,8}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "capture",
+        "ingest_propose",
+        "ingest_apply",
+        "reinforce_update",
+        "lint",
+        "git_commit",
+        "git_push",
+        "migration",
+        "rebuild",
+        "query_file_back",
+        "error"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^src_[0-9]{8}_[a-z0-9]{8,16}$"
+      }
+    },
+    "node_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^node_[a-z0-9]+(?:_[a-z0-9-]+)+$"
+      }
+    },
+    "policy_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "model": {
+      "type": "string"
+    },
+    "artifacts_touched": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(00_Raw|10_Wiki|20_Meta|30_Ops)/.+"
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "details": {
+      "type": "object"
+    }
+  }
+}

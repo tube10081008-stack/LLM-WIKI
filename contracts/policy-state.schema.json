@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p-reinforce.local/contracts/policy-state.schema.json",
+  "title": "PolicyState",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "updated_at",
+    "classification_weights",
+    "boundary_adjustments",
+    "auto_apply_thresholds"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "classification_weights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Projects",
+        "Topics",
+        "Decisions",
+        "Skills",
+        "Views"
+      ],
+      "properties": {
+        "Projects": { "type": "number", "minimum": 0 },
+        "Topics": { "type": "number", "minimum": 0 },
+        "Decisions": { "type": "number", "minimum": 0 },
+        "Skills": { "type": "number", "minimum": 0 },
+        "Views": { "type": "number", "minimum": 0 }
+      }
+    },
+    "boundary_adjustments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "from",
+          "to",
+          "reason",
+          "created_at"
+        ],
+        "properties": {
+          "from": { "type": "string", "minLength": 1 },
+          "to": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 },
+          "created_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "auto_apply_thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "link_addition",
+        "minor_summary_update",
+        "new_node_creation",
+        "folder_move",
+        "refactor_proposal"
+      ],
+      "properties": {
+        "link_addition": { "type": "number", "minimum": 0, "maximum": 1 },
+        "minor_summary_update": { "type": "number", "minimum": 0, "maximum": 1 },
+        "new_node_creation": { "type": "number", "minimum": 0, "maximum": 1 },
+        "folder_move": { "type": "number", "minimum": 0, "maximum": 1 },
+        "refactor_proposal": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p-reinforce.local/contracts/graph-cache.schema.json",
+  "title": "GraphCache",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "node_count",
+    "edge_count",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "node_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "edge_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "node_kind",
+          "node_type",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(node_[a-z0-9]+(?:_[a-z0-9-]+)+|cat_[a-z0-9]+(?:_[a-z0-9-]+)*)$"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "node_kind": {
+            "type": "string",
+            "enum": [
+              "wiki",
+              "category"
+            ]
+          },
+          "node_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^10_Wiki/.+\\.md$"
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "node_kind": {
+                  "const": "wiki"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "path"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^node_[a-z0-9]+(?:_[a-z0-9-]+)+$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "node_kind": {
+                  "const": "category"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^cat_[a-z0-9]+(?:_[a-z0-9-]+)*$"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source",
+          "target",
+          "relation"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^(node_[a-z0-9]+(?:_[a-z0-9-]+)+|cat_[a-z0-9]+(?:_[a-z0-9-]+)*)$"
+          },
+          "target": {
+            "type": "string",
+            "pattern": "^(node_[a-z0-9]+(?:_[a-z0-9-]+)+|cat_[a-z0-9]+(?:_[a-z0-9-]+)*)$"
+          },
+          "relation": {
+            "type": "string",
+            "enum": [
+              "related",
+              "contradicts",
+              "parent_category",
+              "wikilink"
+            ]
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

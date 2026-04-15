@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p-reinforce.local/contracts/wiki-node-frontmatter.schema.json",
+  "title": "WikiNodeFrontmatter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "schema_version",
+    "node_type",
+    "title",
+    "status",
+    "confidence_score",
+    "created_at",
+    "updated_at",
+    "last_reinforced",
+    "category_path",
+    "source_refs",
+    "related",
+    "contradicts",
+    "policy_version"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^node_[a-z0-9]+(?:_[a-z0-9-]+)+$"
+    },
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "node_type": {
+      "type": "string",
+      "enum": [
+        "project",
+        "topic",
+        "decision",
+        "skill",
+        "view",
+        "source_summary",
+        "analysis"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "draft",
+        "deprecated",
+        "superseded",
+        "archived"
+      ]
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "last_reinforced": {
+      "type": "string",
+      "format": "date"
+    },
+    "category_path": {
+      "type": "string",
+      "pattern": "^10_Wiki/(Projects|Topics|Decisions|Skills|Views)(/.+)?$"
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^src_[0-9]{8}_[a-z0-9]{8,16}$"
+      }
+    },
+    "related": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^node_[a-z0-9]+(?:_[a-z0-9-]+)+$"
+      }
+    },
+    "contradicts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^node_[a-z0-9]+(?:_[a-z0-9-]+)+$"
+      }
+    },
+    "policy_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "last_commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{7,40}$"
+    },
+    "aliases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

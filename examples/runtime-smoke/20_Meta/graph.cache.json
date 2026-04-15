@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-15T07:03:48.592Z",
+  "node_count": 3,
+  "edge_count": 7,
+  "nodes": [
+    {
+      "id": "node_topic_agent-queue-seed",
+      "label": "Agent Queue Seed",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Research/agent-queue-seed.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_topic_persistent-wiki-contracts",
+      "label": "Persistent Wiki Contracts",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Research/persistent-wiki-contracts.md",
+      "status": "draft"
+    },
+    {
+      "id": "cat_topics_research",
+      "label": "Topics / Research",
+      "node_kind": "category",
+      "node_type": "category",
+      "status": "active"
+    }
+  ],
+  "edges": [
+    {
+      "source": "node_topic_agent-queue-seed",
+      "target": "cat_topics_research",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_agent-queue-seed",
+      "target": "node_topic_agent",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_agent-queue-seed",
+      "target": "node_topic_queue",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_persistent-wiki-contracts",
+      "target": "cat_topics_research",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_persistent-wiki-contracts",
+      "target": "node_topic_karpathy-llm-wiki",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_agent-queue-seed",
+      "target": "node_topic_agent-queue-seed",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_persistent-wiki-contracts",
+      "target": "node_topic_persistent-wiki-contracts",
+      "relation": "wikilink",
+      "weight": 1
+    }
+  ]
+}

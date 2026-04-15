@@ -1,0 +1,35 @@
+{
+  "name": "llm-wiki-node-creator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:cloud": "vercel dev",
+    "build": "vite build",
+    "verify:integrity": "node scripts/verify-integrity.js",
+    "verify:workspace": "node scripts/verify-workspace-persistence.js",
+    "agent:scan": "node scripts/p-reinforce-agent.js",
+    "agent:watch": "node scripts/p-reinforce-agent.js --watch",
+    "git:status": "node scripts/p-reinforce-git.js",
+    "preview": "vite preview",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.9.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "lucide-react": "^0.542.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "vite": "^7.1.3"
+  }
+}

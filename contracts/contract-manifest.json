@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "bundle_version": 2,
+  "updated_at": "2026-04-15",
+  "canonical_artifacts": [
+    {
+      "name": "RawSourceManifest",
+      "schema": "contracts/raw-source.schema.json",
+      "storage_root": "00_Raw/"
+    },
+    {
+      "name": "WikiNodeFrontmatter",
+      "schema": "contracts/wiki-node-frontmatter.schema.json",
+      "storage_root": "10_Wiki/"
+    },
+    {
+      "name": "PolicyState",
+      "schema": "contracts/policy-state.schema.json",
+      "storage_root": "20_Meta/"
+    },
+    {
+      "name": "EventLogEntry",
+      "schema": "contracts/event-log-entry.schema.json",
+      "storage_root": "20_Meta/events/"
+    },
+    {
+      "name": "JobQueue",
+      "schema": "contracts/job-queue.schema.json",
+      "storage_root": "30_Ops/jobs/"
+    },
+    {
+      "name": "AgentStatus",
+      "schema": "contracts/agent-status.schema.json",
+      "storage_root": "30_Ops/jobs/"
+    }
+  ],
+  "derived_artifacts": [
+    {
+      "name": "IndexJson",
+      "schema": "contracts/index-json.schema.json",
+      "storage_root": "20_Meta/"
+    },
+    {
+      "name": "GraphCache",
+      "schema": "contracts/graph-cache.schema.json",
+      "storage_root": "20_Meta/"
+    }
+  ]
+}

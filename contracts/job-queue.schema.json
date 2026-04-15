@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://p-reinforce.local/contracts/job-queue.schema.json",
+  "title": "JobQueue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "updated_at",
+    "jobs"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "jobs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "job_id",
+          "job_type",
+          "status",
+          "source_id",
+          "raw_root",
+          "origin",
+          "attempts",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "pattern": "^job_[0-9]{8}_[a-z0-9]{6,12}$"
+          },
+          "job_type": {
+            "type": "string",
+            "enum": [
+              "ingest_raw"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "processing",
+              "pending_review",
+              "completed",
+              "failed"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "pattern": "^src_[0-9]{8}_[a-z0-9]{8,16}$"
+          },
+          "raw_root": {
+            "type": "string",
+            "pattern": "^00_Raw/.+"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "manual_scan",
+              "watcher_scan"
+            ]
+          },
+          "attempts": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
