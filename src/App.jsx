@@ -25,7 +25,9 @@ import {
   createAttachmentId,
   executeGitCheckpoint,
   executeRebuild,
+  exportKnowledgeBase,
   fetchRebuildPlan,
+  fetchReliabilityReport,
   fetchWorkspaceIntegrity,
   fetchWorkspaceNode,
   fetchWorkspaceSnapshot,
@@ -1299,6 +1301,13 @@ function WorkspaceSectionView({
         >
           <RebuildCard />
         </SectionCard>
+
+        <SectionCard
+          title="10-Year Reliability"
+          description="Step 10 — backup, export, portability, observability, and recovery assessment."
+        >
+          <ReliabilityCard />
+        </SectionCard>
       </div>
     </SectionShell>
   );
@@ -2110,6 +2119,135 @@ function RebuildCard() {
           {rebuildResult.nodes_rebuilt > 0 ? (
             <p className="mt-1 text-xs">
               {rebuildResult.nodes_rebuilt} rebuilt, {rebuildResult.nodes_skipped} skipped
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function ReliabilityCard() {
+  const [report, setReport] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [exportResult, setExportResult] = useState(null);
+  const [exportLoading, setExportLoading] = useState(false);
+
+  const handleFetch = async () => {
+    setLoading(true);
+    setReport(null);
+    try {
+      const result = await fetchReliabilityReport();
+      setReport(result.report);
+    } catch (error) {
+      setReport({ overall_status: 'critical', checks: [], summary: { pass: 0, warn: 0, fail: 1, total: 1 } });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleExport = async () => {
+    setExportLoading(true);
+    setExportResult(null);
+    try {
+      const result = await exportKnowledgeBase();
+      setExportResult(result.export);
+    } catch (error) {
+      setExportResult({ exported: false, message: error.message });
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  const statusColor = {
+    healthy: 'border-emerald-200 bg-emerald-50 text-emerald-800',
+    degraded: 'border-amber-200 bg-amber-50 text-amber-800',
+    critical: 'border-red-200 bg-red-50 text-red-800',
+  };
+
+  const statusEmoji = { healthy: '🟢', degraded: '🟡', critical: '🔴' };
+  const checkStatusEmoji = { pass: '✅', warn: '⚠️', fail: '❌', skip: '⏭️' };
+
+  const categories = ['backup', 'export', 'portability', 'observability', 'recovery'];
+  const categoryLabel = {
+    backup: '💾 Backup',
+    export: '📦 Export',
+    portability: '🔄 Portability',
+    observability: '👁️ Observability',
+    recovery: '🔧 Recovery',
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-3">
+        <button
+          type="button"
+          id="reliability-report-btn"
+          disabled={loading}
+          onClick={handleFetch}
+          className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <AlertCircle className="h-4 w-4" />}
+          Run Assessment
+        </button>
+        <button
+          type="button"
+          id="export-knowledge-btn"
+          disabled={exportLoading}
+          onClick={handleExport}
+          className="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal-600/20 transition-all hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {exportLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+          Export Knowledge
+        </button>
+      </div>
+
+      {report ? (
+        <div className="space-y-3">
+          <div className={`rounded-[22px] border px-4 py-3 text-sm font-semibold ${statusColor[report.overall_status] ?? statusColor.critical}`}>
+            {statusEmoji[report.overall_status]} Overall: {report.overall_status?.toUpperCase()} — {report.summary?.pass ?? 0}/{report.summary?.total ?? 0} checks passing
+          </div>
+
+          {categories.map((cat) => {
+            const catChecks = (report.checks ?? []).filter((c) => c.category === cat);
+            if (catChecks.length === 0) return null;
+            return (
+              <div key={cat} className="rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-3">
+                <p className="mb-2 text-sm font-semibold text-slate-700">{categoryLabel[cat]}</p>
+                <div className="space-y-1">
+                  {catChecks.map((check) => (
+                    <div key={check.id} className="flex items-start gap-2 text-xs leading-5">
+                      <span className="shrink-0">{checkStatusEmoji[check.status]}</span>
+                      <div>
+                        <span className="font-medium text-slate-800">{check.label}</span>
+                        {check.detail ? <span className="ml-1 text-slate-500">— {check.detail}</span> : null}
+                        {check.recommendation ? <p className="mt-0.5 text-blue-600">💡 {check.recommendation}</p> : null}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <EmptySectionMessage
+          title="No assessment loaded"
+          description="Click 'Run Assessment' to evaluate 10-year reliability."
+        />
+      )}
+
+      {exportResult ? (
+        <div className={`rounded-[22px] border px-4 py-3 text-sm leading-6 ${
+          exportResult.exported
+            ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
+            : 'border-red-200 bg-red-50 text-red-800'
+        }`}>
+          <p className="font-semibold">{exportResult.exported ? '✅ Export complete' : '❌ Export failed'}</p>
+          {exportResult.export_path ? <p className="mt-1 text-xs">📁 {exportResult.export_path}</p> : null}
+          {exportResult.statistics ? (
+            <p className="mt-1 text-xs">
+              {exportResult.statistics.wiki_nodes} nodes, {exportResult.statistics.raw_sources} sources
             </p>
           ) : null}
         </div>

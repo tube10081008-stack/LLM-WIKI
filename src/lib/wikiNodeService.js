@@ -405,6 +405,44 @@ export async function fetchMigrationStatus() {
   };
 }
 
+export async function fetchReliabilityReport() {
+  const response = await fetch('/api/reliability', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'report' }),
+  });
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(data?.error ?? 'Reliability report could not be loaded.');
+  }
+
+  return {
+    report: data?.report ?? null,
+    reflection: data?.reflection ?? [],
+    integrity: data?.integrity ?? null,
+  };
+}
+
+export async function exportKnowledgeBase() {
+  const response = await fetch('/api/reliability', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'export' }),
+  });
+  const data = await response.json().catch(() => null);
+
+  if (!response.ok) {
+    throw new Error(data?.error ?? 'Knowledge base export failed.');
+  }
+
+  return {
+    export: data?.export ?? null,
+    reflection: data?.reflection ?? [],
+    integrity: data?.integrity ?? null,
+  };
+}
+
 export function buildKnowledgeUserPrompt({
   knowledgeType,
   rawText,

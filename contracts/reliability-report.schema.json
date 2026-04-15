@@ -1,0 +1,84 @@
+{
+  "$id": "https://llm-wiki.local/contracts/reliability-report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReliabilityReport",
+  "description": "Captures the 10-year durability assessment of the knowledge base.",
+  "type": "object",
+  "required": ["generated_at", "checks"],
+  "properties": {
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": ["healthy", "degraded", "critical"],
+      "description": "Aggregate health status across all checks."
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "status"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique check identifier."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable label."
+          },
+          "category": {
+            "type": "string",
+            "enum": ["backup", "export", "portability", "observability", "recovery"],
+            "description": "Which reliability pillar this check belongs to."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pass", "warn", "fail", "skip"]
+          },
+          "detail": {
+            "type": "string"
+          },
+          "recommendation": {
+            "type": "string",
+            "description": "What to do if the check fails."
+          }
+        }
+      }
+    },
+    "export_manifest": {
+      "type": "object",
+      "properties": {
+        "total_raw_sources": { "type": "integer", "minimum": 0 },
+        "total_wiki_nodes": { "type": "integer", "minimum": 0 },
+        "total_events": { "type": "integer", "minimum": 0 },
+        "total_size_bytes": { "type": "integer", "minimum": 0 },
+        "exportable": { "type": "boolean" },
+        "last_export": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "provider_portability": {
+      "type": "object",
+      "properties": {
+        "current_provider": { "type": "string" },
+        "model_locked": { "type": "boolean" },
+        "can_switch_provider": { "type": "boolean" },
+        "raw_truth_independent": {
+          "type": "boolean",
+          "description": "True if raw layer does not depend on any LLM provider."
+        }
+      }
+    },
+    "backup_status": {
+      "type": "object",
+      "properties": {
+        "git_commits": { "type": "integer", "minimum": 0 },
+        "has_remote": { "type": "boolean" },
+        "last_push": { "type": ["string", "null"] },
+        "dirty_files": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

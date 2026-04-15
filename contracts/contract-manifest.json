@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "bundle_version": 3,
+  "bundle_version": 4,
   "updated_at": "2026-04-15",
   "canonical_artifacts": [
     {
@@ -48,6 +48,11 @@
     {
       "name": "MigrationManifest",
       "schema": "contracts/migration-manifest.schema.json",
+      "storage_root": "30_Ops/"
+    },
+    {
+      "name": "ReliabilityReport",
+      "schema": "contracts/reliability-report.schema.json",
       "storage_root": "30_Ops/"
     }
   ]
