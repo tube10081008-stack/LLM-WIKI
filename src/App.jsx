@@ -933,6 +933,20 @@ function App() {
             result={result}
             form={form}
             gateSummary={gateSummary}
+            lintMeta={lintMeta}
+            lintStatus={lintStatus}
+            onRunLint={handleRunLint}
+            reinforcementNote={reinforcementNote}
+            reinforcementStatus={reinforcementStatus}
+            reinforcementMeta={reinforcementMeta}
+            onReinforcementNoteChange={setReinforcementNote}
+            onReinforcement={handleReinforcement}
+            agentMeta={agentMeta}
+            agentStatus={agentStatus}
+            agentProcessMeta={agentProcessMeta}
+            agentProcessStatus={agentProcessStatus}
+            onRunAgentScan={handleRunAgentScan}
+            onProcessAgentQueue={handleProcessAgentQueue}
           />
         )}
       </div>
@@ -956,6 +970,20 @@ function WorkspaceSectionView({
   result,
   form,
   gateSummary,
+  lintMeta,
+  lintStatus,
+  onRunLint,
+  reinforcementNote,
+  reinforcementStatus,
+  reinforcementMeta,
+  onReinforcementNoteChange,
+  onReinforcement,
+  agentMeta,
+  agentStatus,
+  agentProcessMeta,
+  agentProcessStatus,
+  onRunAgentScan,
+  onProcessAgentQueue,
 }) {
   const sectionMeta =
     WORKSPACE_SECTIONS.find((section) => section.id === sectionId) ?? WORKSPACE_SECTIONS[1];
@@ -964,6 +992,10 @@ function WorkspaceSectionView({
       ['blocked', 'fail'].includes(gate.status) &&
       gate.blocksStep === sectionMeta.blockedBy,
   );
+  const selectedWorkspaceEntry =
+    (workspaceSnapshot?.wiki?.recentEntries ?? []).find((entry) => entry.path === activeWorkspaceNodePath) ??
+    workspaceSnapshot?.wiki?.recentEntries?.[0] ??
+    null;
 
   if (sectionId === 'inbox') {
     return (
@@ -1030,40 +1062,11 @@ function WorkspaceSectionView({
         description="This view combines graph exploration with category topology and structural health."
         blockedGate={blockedGate}
       >
-        <div className="grid gap-5 xl:grid-cols-[minmax(0,1.1fr)_380px]">
-          <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-soft">
-            <div className="border-b border-slate-200/80 px-5 py-4">
-              <p className="text-sm font-semibold text-slate-900">Graph Preview</p>
-              <p className="mt-1 text-sm text-slate-500">
-                Persisted graph cache takes priority, and Studio proposals remain the fallback preview.
-              </p>
-            </div>
-            <div className="h-[640px]">
-              {workspaceNodeDetail?.graph ? (
-                <Suspense fallback={<GraphLoadingShell />}>
-                  <GraphCanvas graph={workspaceNodeDetail.graph} />
-                </Suspense>
-              ) : workspaceSnapshot?.graph?.focusedGraph ? (
-                <Suspense fallback={<GraphLoadingShell />}>
-                  <GraphCanvas graph={workspaceSnapshot.graph.focusedGraph} />
-                </Suspense>
-              ) : result?.graph ? (
-                <Suspense fallback={<GraphLoadingShell />}>
-                  <GraphCanvas graph={result.graph} />
-                </Suspense>
-              ) : (
-                <EmptySectionMessage
-                  title="No graph yet"
-                  description="Generate a wiki proposal in Studio to seed the Garden preview."
-                />
-              )}
-            </div>
-          </div>
-
+        <div className="grid gap-5 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <div className="space-y-5">
             <SectionCard
               title="Persisted Nodes"
-              description="Select a stored node to reopen its markdown and graph context."
+              description="Explore your collected knowledge and read the detailed summaries of each node."
             >
               <PersistedNodeList
                 entries={workspaceSnapshot?.wiki?.recentEntries ?? []}
@@ -1071,6 +1074,7 @@ function WorkspaceSectionView({
                 onSelect={onSelectWorkspaceNode}
               />
             </SectionCard>
+            
             <SectionCard
               title="Persisted Node Preview"
               description="This is the reopen flow for durable wiki pages."
@@ -1081,12 +1085,16 @@ function WorkspaceSectionView({
                 fallbackItems={reflectionItems}
               />
             </SectionCard>
+          </div>
+
+          <div className="space-y-5">
             <SectionCard
               title="Category Topology"
               description="These are the semantic roots visible in the live workspace."
             >
               <CategoryList workspaceSnapshot={workspaceSnapshot} />
             </SectionCard>
+            
             <SectionCard
               title="Structural Health"
               description="Garden lint turns graph shape into actionable maintenance signals."
@@ -1095,7 +1103,7 @@ function WorkspaceSectionView({
                 lint={workspaceSnapshot?.lint}
                 lintMeta={lintMeta}
                 lintStatus={lintStatus}
-                onRunLint={() => void handleRunLint()}
+                onRunLint={() => void onRunLint()}
               />
             </SectionCard>
           </div>
@@ -1124,9 +1132,9 @@ function WorkspaceSectionView({
               note={reinforcementNote}
               status={reinforcementStatus}
               feedbackMeta={reinforcementMeta}
-              onNoteChange={setReinforcementNote}
+              onNoteChange={onReinforcementNoteChange}
               onSignal={(signalType, targetCategory) =>
-                void handleReinforcement(signalType, targetCategory)
+                void onReinforcement(signalType, targetCategory)
               }
             />
           </SectionCard>
@@ -1199,8 +1207,8 @@ function WorkspaceSectionView({
                 agentStatus={agentStatus}
                 processMeta={agentProcessMeta}
                 processStatus={agentProcessStatus}
-                onScan={() => void handleRunAgentScan()}
-                onProcess={() => void handleProcessAgentQueue()}
+                onScan={() => void onRunAgentScan()}
+                onProcess={() => void onProcessAgentQueue()}
               />
             </SectionCard>
 
@@ -1419,22 +1427,49 @@ function PersistedNodeList({ entries, activePath, onSelect }) {
     );
   }
 
+  const handleOpenFolder = async (entryPath, event) => {
+    event.stopPropagation();
+    try {
+      await fetch('/api/open-folder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: entryPath }),
+      });
+    } catch {
+      // 실패해도 무시
+    }
+  };
+
   return (
-    <div className="space-y-3">
+    <div className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-3">
       {entries.map((entry) => (
         <button
           key={entry.path}
           type="button"
           onClick={() => void onSelect?.(entry.path)}
-          className={`w-full rounded-[22px] border px-4 py-3 text-left transition ${
+          className={`group relative flex w-full flex-col justify-between rounded-[22px] border px-4 py-4 text-left transition ${
             activePath === entry.path
               ? 'border-sky bg-sky/5'
               : 'border-slate-200 bg-slate-50 hover:border-slate-300 hover:bg-white'
           }`}
         >
-          <p className="text-sm font-semibold text-slate-900">{entry.title}</p>
-          <p className="mt-1 text-xs text-slate-500">{entry.path}</p>
-          <p className="mt-2 text-sm leading-6 text-slate-600">{entry.summary}</p>
+          <div>
+            <p className="line-clamp-2 text-sm font-semibold text-slate-900 leading-snug">{entry.title}</p>
+            <p className="mt-1.5 truncate text-[11px] text-slate-400 font-medium tracking-wide">{entry.path}</p>
+            <p className="mt-2.5 line-clamp-3 text-[13px] leading-relaxed text-slate-600">{entry.summary}</p>
+          </div>
+          <span
+            role="button"
+            tabIndex={0}
+            title="폴더 열기"
+            onClick={(e) => handleOpenFolder(entry.path, e)}
+            onKeyDown={(e) => { if (e.key === 'Enter') handleOpenFolder(entry.path, e); }}
+            className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-lg bg-slate-200/60 text-slate-500 opacity-0 transition-all hover:bg-sky/10 hover:text-sky group-hover:opacity-100"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+              <path d="M3.75 3A1.75 1.75 0 002 4.75v3.26a3.235 3.235 0 011.75-.51h12.5c.644 0 1.245.188 1.75.51V6.75A1.75 1.75 0 0016.25 5h-4.836a.25.25 0 01-.177-.073L9.823 3.513A1.75 1.75 0 008.586 3H3.75zM3.75 9A1.75 1.75 0 002 10.75v4.5c0 .966.784 1.75 1.75 1.75h12.5A1.75 1.75 0 0018 15.25v-4.5A1.75 1.75 0 0016.25 9H3.75z" />
+            </svg>
+          </span>
         </button>
       ))}
     </div>

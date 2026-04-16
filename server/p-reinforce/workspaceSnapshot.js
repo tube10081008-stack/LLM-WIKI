@@ -178,79 +178,92 @@ async function readRecentEvents(workspaceRoot, indexJson, limit) {
 }
 
 function buildFocusedGraph(indexJson, graphCache, focusEntry) {
-  if (!focusEntry || !graphCache) {
+  if (!graphCache) {
     return null;
   }
 
   const nodeLookup = new Map((graphCache.nodes ?? []).map((node) => [node.id, node]));
-  const focusNode = nodeLookup.get(focusEntry.node_id);
-
-  if (!focusNode) {
-    return null;
-  }
-
-  const relatedEdges = (graphCache.edges ?? []).filter(
-    (edge) =>
-      edge.source === focusEntry.node_id &&
-      (edge.relation === 'related' || edge.relation === 'wikilink'),
-  );
-  const categoryEdge = (graphCache.edges ?? []).find(
-    (edge) => edge.source === focusEntry.node_id && edge.relation === 'parent_category',
-  );
-  const uiNodes = [
-    {
-      id: focusNode.id,
-      label: focusNode.label,
-      role: 'core',
-      meta: focusEntry.path,
-    },
-  ];
+  const uiNodes = [];
   const uiEdges = [];
+  const addedNodeIds = new Set();
 
-  if (categoryEdge) {
-    const categoryNode = nodeLookup.get(categoryEdge.target);
-
-    if (categoryNode) {
+  // 카테고리를 중심축(core)으로 배치 — 지식 그래프의 구조적 허브
+  for (const node of graphCache.nodes ?? []) {
+    if (node.node_kind === 'category') {
       uiNodes.push({
-        id: categoryNode.id,
-        label: categoryNode.label,
-        role: 'category',
-        meta: 'persisted category',
+        id: node.id,
+        label: node.label,
+        role: 'core',
+        meta: 'category hub',
       });
-      uiEdges.push({
-        id: `edge-${focusNode.id}-${categoryNode.id}`,
-        source: focusNode.id,
-        target: categoryNode.id,
-        label: 'category',
+      addedNodeIds.add(node.id);
+    } else if (node.node_kind === 'wiki') {
+      uiNodes.push({
+        id: node.id,
+        label: node.label,
+        role: 'related',
+        meta: node.path ?? node.node_type,
       });
+      addedNodeIds.add(node.id);
     }
   }
 
-  for (const edge of relatedEdges.slice(0, 6)) {
-    const targetNode = nodeLookup.get(edge.target);
-
-    if (!targetNode) {
+  // 모든 엣지를 추가하고, 타겟이 없으면 가상 노드 생성
+  for (const edge of graphCache.edges ?? []) {
+    // 자기 자신으로의 wikilink는 무시
+    if (edge.source === edge.target) {
       continue;
     }
 
-    uiNodes.push({
-      id: targetNode.id,
-      label: targetNode.label,
-      role: 'related',
-      meta: targetNode.path ?? targetNode.node_type,
-    });
+    // 소스가 존재하지 않으면 스킵
+    if (!addedNodeIds.has(edge.source)) {
+      continue;
+    }
+
+    // 타겟이 존재하지 않으면 가상(placeholder) 노드 추가
+    if (!addedNodeIds.has(edge.target)) {
+      const targetNode = nodeLookup.get(edge.target);
+      const label = targetNode?.label || humanizeNodeId(edge.target);
+      uiNodes.push({
+        id: edge.target,
+        label,
+        role: 'tag',
+        meta: edge.relation === 'related' ? 'related candidate' : edge.relation,
+      });
+      addedNodeIds.add(edge.target);
+    }
+
     uiEdges.push({
-      id: `edge-${focusNode.id}-${targetNode.id}-${edge.relation}`,
-      source: focusNode.id,
-      target: targetNode.id,
-      label: edge.relation,
+      id: `edge-${edge.source}-${edge.target}-${edge.relation}`,
+      source: edge.source,
+      target: edge.target,
+      label: edge.relation === 'parent_category' ? 'category' : edge.relation,
     });
   }
 
-  return {
-    nodes: uiNodes,
-    edges: uiEdges,
-  };
+  // 카테고리가 없으면 가장 연결이 많은 위키 노드를 core로 승격
+  if (uiNodes.length > 0 && !uiNodes.some((n) => n.role === 'core')) {
+    const edgeCount = {};
+    for (const edge of uiEdges) {
+      edgeCount[edge.source] = (edgeCount[edge.source] || 0) + 1;
+      edgeCount[edge.target] = (edgeCount[edge.target] || 0) + 1;
+    }
+    const mostConnected = uiNodes
+      .filter((n) => n.role === 'related')
+      .sort((a, b) => (edgeCount[b.id] || 0) - (edgeCount[a.id] || 0))[0];
+    if (mostConnected) {
+      mostConnected.role = 'core';
+    }
+  }
+
+  return uiNodes.length > 0 ? { nodes: uiNodes, edges: uiEdges } : null;
+}
+
+function humanizeNodeId(nodeId) {
+  return String(nodeId)
+    .replace(/^node_(topic|skill|project|decision)_/, '')
+    .replace(/[-_]/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-16T02:23:49.310Z",
+  "node_count": 4,
+  "entries": [
+    {
+      "node_id": "node_skill_band-cover-ai-pipeline",
+      "title": "Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/band-cover-ai-pipeline.md",
+      "status": "draft",
+      "updated_at": "2026-04-16",
+      "source_ref_count": 1,
+      "summary": "유튜브 URL 혹은 로컬 영상을 입력받아 **yt-dlp**와 **FFmpeg**로 프레임을 추출하고, **4단계 필터링 파이프라인**과 **Gemini 2.5 Flash Vision** AI를 통해 악기별(보컬, 기타, 베이스, 피아노, 드럼) 최적의 프레임을 자동 선별하는 시스템입니다."
+    },
+    {
+      "node_id": "node_skill_untitled",
+      "title": "로컬 서버 데스크톱 앱 패키징 기법",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/local-desktop-app-packaging.md",
+      "status": "draft",
+      "updated_at": "2026-04-16",
+      "source_ref_count": 1,
+      "summary": "이 기법은 Node.js 기반의 로컬 웹 서비스를 터미널 조작 없이 바탕화면 아이콘 하나로 실행 가능하도록 데스크톱 네이티브 앱처럼 패키징하는 자동화 방법론입니다. PWA 설정, 배치 스크립트, 그리고 커스텀 아이콘 바로가기 생성을 결합하여 사용자 경험을 극대화합니다."
+    },
+    {
+      "node_id": "node_topic_hongsam-identity-core",
+      "title": "홍삼의 자기 정의와 가치관",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Identity/hongsam-identity-core.md",
+      "status": "draft",
+      "updated_at": "2026-04-16",
+      "source_ref_count": 1,
+      "summary": "나는 '홍삼'이다. ADHD라는 특성을 가지고 있으며, 이는 나에게 있어 시작의 에너지를 상징한다. 어떤 일이든 '첫 삽'을 뜰 때 그 누구보다 폭발적인 몰입도와 추진력을 발휘하는 사람이다."
+    },
+    {
+      "node_id": "node_topic_modern-definition-of-ubermensch",
+      "title": "초인(Übermensch)의 현대적 정의와 실천",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/modern-definition-of-ubermensch.md",
+      "status": "draft",
+      "updated_at": "2026-04-16",
+      "source_ref_count": 1,
+      "summary": "초인은 시대적 통찰을 바탕으로 자신만의 질서를 창조하고 끝까지 완수하는 능동적 실천가이다."
+    }
+  ]
+}

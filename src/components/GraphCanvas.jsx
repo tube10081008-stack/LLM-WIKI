@@ -1,9 +1,12 @@
+import { useCallback, useMemo, useState } from 'react';
 import {
   Background,
   Controls,
   MarkerType,
   MiniMap,
   ReactFlow,
+  useNodesState,
+  useEdgesState,
 } from '@xyflow/react';
 
 const ROLE_STYLE_MAP = {
@@ -33,8 +36,73 @@ const ROLE_STYLE_MAP = {
   },
 };
 
+const ROLE_FILTER_OPTIONS = ['core', 'category', 'tag', 'related'];
+
 function GraphCanvas({ graph }) {
-  const { nodes, edges } = buildFlowGraph(graph);
+  const [activeFilter, setActiveFilter] = useState(null);
+  const { initialNodes, initialEdges } = useMemo(() => buildFlowGraph(graph), [graph]);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  // 필터 토글: 같은 버튼 다시 누르면 해제
+  const handleFilterToggle = useCallback((role) => {
+    setActiveFilter((prev) => (prev === role ? null : role));
+  }, []);
+
+  // 필터링된 노드와 엣지 계산
+  const { filteredNodes, filteredEdges } = useMemo(() => {
+    if (!activeFilter) {
+      // 필터 없으면 전부 보여주되, 투명도 리셋
+      return {
+        filteredNodes: nodes.map((n) => ({
+          ...n,
+          style: { ...n.style, opacity: 1, transition: 'opacity 0.3s ease' },
+        })),
+        filteredEdges: edges.map((e) => ({
+          ...e,
+          style: { ...e.style, opacity: 1, transition: 'opacity 0.3s ease' },
+          labelStyle: { ...e.labelStyle, opacity: 1, transition: 'opacity 0.3s ease' },
+        })),
+      };
+    }
+
+    // core 노드는 항상 보이게
+    const visibleNodeIds = new Set();
+    nodes.forEach((n) => {
+      if (n.data.role === activeFilter || n.data.role === 'core') {
+        visibleNodeIds.add(n.id);
+      }
+    });
+
+    const filteredNodes = nodes.map((n) => ({
+      ...n,
+      style: {
+        ...n.style,
+        opacity: visibleNodeIds.has(n.id) ? 1 : 0.12,
+        transition: 'opacity 0.3s ease',
+        pointerEvents: visibleNodeIds.has(n.id) ? 'all' : 'none',
+      },
+    }));
+
+    const filteredEdges = edges.map((e) => {
+      const isVisible = visibleNodeIds.has(e.source) && visibleNodeIds.has(e.target);
+      return {
+        ...e,
+        style: {
+          ...e.style,
+          opacity: isVisible ? 1 : 0.06,
+          transition: 'opacity 0.3s ease',
+        },
+        labelStyle: {
+          ...e.labelStyle,
+          opacity: isVisible ? 1 : 0.06,
+          transition: 'opacity 0.3s ease',
+        },
+      };
+    });
+
+    return { filteredNodes, filteredEdges };
+  }, [nodes, edges, activeFilter]);
 
   return (
     <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-gradient-to-br from-white via-[#f7fbff] to-[#fff7f4]">
@@ -48,19 +116,27 @@ function GraphCanvas({ graph }) {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <LegendChip tone="core">메인 노드</LegendChip>
-          <LegendChip tone="category">카테고리</LegendChip>
-          <LegendChip tone="tag">태그</LegendChip>
-          <LegendChip tone="related">연결 노드</LegendChip>
+          {ROLE_FILTER_OPTIONS.map((role) => (
+            <FilterChip
+              key={role}
+              tone={role}
+              active={activeFilter === role}
+              onClick={() => handleFilterToggle(role)}
+            >
+              {role === 'core' ? '메인 노드' : role === 'category' ? '카테고리' : role === 'tag' ? '태그' : '연결 노드'}
+            </FilterChip>
+          ))}
         </div>
       </div>
 
       <div className="h-[680px] w-full">
         <ReactFlow
-          nodes={nodes}
-          edges={edges}
+          nodes={filteredNodes}
+          edges={filteredEdges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
           fitView
-          fitViewOptions={{ padding: 0.18 }}
+          fitViewOptions={{ padding: 0.22 }}
           minZoom={0.35}
           maxZoom={1.6}
           proOptions={{ hideAttribution: true }}
@@ -86,8 +162,8 @@ function GraphCanvas({ graph }) {
   );
 }
 
-function LegendChip({ tone, children }) {
-  const className =
+function FilterChip({ tone, active, onClick, children }) {
+  const baseClass =
     tone === 'core'
       ? 'bg-sky text-white'
       : tone === 'category'
@@ -96,10 +172,16 @@ function LegendChip({ tone, children }) {
           ? 'bg-orange-100 text-orange-700'
           : 'bg-sky/10 text-sky';
 
+  const activeRing = active ? 'ring-2 ring-offset-1 ring-sky shadow-md scale-105' : '';
+
   return (
-    <span className={`inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium ${className}`}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 cursor-pointer select-none hover:scale-105 ${baseClass} ${activeRing}`}
+    >
       {children}
-    </span>
+    </button>
   );
 }
 
@@ -110,23 +192,37 @@ function buildFlowGraph(graph) {
   const relatedNodes = graph.nodes.filter((node) => node.role === 'related');
   const positions = {};
 
+  // 코어 노드: 정중앙
   if (coreNode) {
     positions[coreNode.id] = { x: 0, y: 0 };
   }
 
+  // 카테고리: 코어 위쪽 (충분히 떨어뜨림)
   if (categoryNode) {
-    positions[categoryNode.id] = { x: 0, y: -230 };
+    positions[categoryNode.id] = { x: 0, y: -280 };
   }
 
+  // 태그: 코어 왼쪽 반원에 펼침 (겹침 방지)
   tagNodes.forEach((node, index) => {
-    positions[node.id] = polarPosition(index, tagNodes.length, 320, -28);
+    const angle = Math.PI * 0.6 + (Math.PI * 0.8 / Math.max(tagNodes.length, 1)) * index;
+    const radius = 360 + (index % 2) * 80; // 지그재그 배치
+    positions[node.id] = {
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * (radius * 0.65),
+    };
   });
 
+  // 연결 노드: 코어 오른쪽 반원에 펼침
   relatedNodes.forEach((node, index) => {
-    positions[node.id] = polarPosition(index, relatedNodes.length, 380, 156);
+    const angle = -Math.PI * 0.3 + (Math.PI * 0.6 / Math.max(relatedNodes.length, 1)) * index;
+    const radius = 380 + (index % 2) * 90;
+    positions[node.id] = {
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * (radius * 0.65),
+    };
   });
 
-  const nodes = graph.nodes.map((node) => {
+  const initialNodes = graph.nodes.map((node) => {
     const style = ROLE_STYLE_MAP[node.role] ?? ROLE_STYLE_MAP.tag;
 
     return {
@@ -158,7 +254,7 @@ function buildFlowGraph(graph) {
     };
   });
 
-  const edges = graph.edges.map((edge) => ({
+  const initialEdges = graph.edges.map((edge) => ({
     id: edge.id,
     source: edge.source,
     target: edge.target,
@@ -182,21 +278,7 @@ function buildFlowGraph(graph) {
     },
   }));
 
-  return { nodes, edges };
-}
-
-function polarPosition(index, total, radius, offsetDegrees) {
-  const safeTotal = Math.max(total, 1);
-  const angle = ((Math.PI * 2) / safeTotal) * index + degreesToRadians(offsetDegrees);
-
-  return {
-    x: Math.cos(angle) * radius,
-    y: Math.sin(angle) * (radius * 0.72),
-  };
-}
-
-function degreesToRadians(degrees) {
-  return (degrees * Math.PI) / 180;
+  return { initialNodes, initialEdges };
 }
 
 function roleToLabel(role) {

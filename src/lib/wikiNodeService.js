@@ -7,6 +7,21 @@ export const MAX_ATTACHMENT_PREVIEW_BYTES = 4_000_000;
 
 export const KNOWLEDGE_TYPES = [
   {
+    value: 'personal-identity',
+    label: '나의 정체성',
+    description: '성격, 취향, 가치관, 경험, 목표를 구조화합니다.',
+  },
+  {
+    value: 'daily-reflection',
+    label: '일상 생각',
+    description: '감정, 관찰, 아이디어, 일기를 기록합니다.',
+  },
+  {
+    value: 'learning-log',
+    label: '배움 기록',
+    description: '깨달음, 독서, 강의, 실험에서 얻은 교훈을 정리합니다.',
+  },
+  {
     value: 'image-prompt',
     label: '이미지 프롬프트',
     description: '장면, 스타일, 피사체, 촬영 조건을 구조화합니다.',
@@ -49,32 +64,62 @@ Your task:
 Rules:
 1. Respond with JSON only.
 2. The JSON schema must match the requested schema exactly.
-3. The markdown field must include YAML frontmatter.
-4. Frontmatter must include:
+3. The 'slug' field must be a short, English-only, hyphen-separated string suitable for filenames (e.g., "local-desktop-app").
+4. The markdown field must include YAML frontmatter.
+5. Frontmatter must include:
    - title
    - date
    - knowledge_type
    - tags
    - connected_nodes
-5. The markdown body must be written in Korean.
-6. The body should include:
-   - 핵심 요약
-   - 추출 포인트
-   - 다음 액션
-7. The graph must place the newly created node at the center and connect category, tags, and related nodes.
-8. Use role values only from:
+6. The markdown body must be written in Korean.
+7. The body structure depends on knowledge_type:
+   - For "personal-identity": 나는 누구인가 (자기 정의), 핵심 가치관/성격, 취향과 선호, 경험에서 온 신념, 현재 목표
+   - For "daily-reflection": 오늘의 감정/상태, 관찰한 것, 떠오른 생각, 연결된 과거 경험, 내일 해볼 것
+   - For "learning-log": 핵심 교훈 한 줄, 배운 맥락 (어디서/어떻게), 구체적 내용 정리, 내 삶에 적용할 점, 더 탐구할 질문
+   - For all other types: 핵심 요약, 추출 포인트, 다음 액션
+8. The graph must place the newly created node at the center and connect category, tags, and related nodes.
+9. Use role values only from:
    - core
    - category
    - tag
    - related
 9. When images are attached, incorporate visible information into the markdown and graph.
 10. Do not wrap the JSON in markdown fences.
+
+## Tag Design Principles (CRITICAL — read carefully)
+
+This knowledge graph will scale to 100,000+ nodes over 10 years.
+Tags must be **timeless, concept-level, and reusable** across the entire graph.
+
+### 3-Tier Tag Hierarchy (pick 3–5 tags, mixing tiers):
+| Tier | Scope | Examples |
+| --- | --- | --- |
+| Domain (분야) | Broadest umbrella. Rarely changes. | AI-ML, DevOps, Frontend, Backend, Data-Engineering, Design, Education |
+| Pattern (패턴) | Reusable technique or approach. | Pipeline-Automation, Real-Time-Processing, Container-Deployment, CI-CD, Caching-Strategy |
+| Tech-Family (기술군) | Product family WITHOUT version. | Gemini-API, FFmpeg, Docker, React, Node-Runtime, PWA |
+
+### STRICT RULES:
+- **NEVER** include version numbers in tags.
+  BAD: "Gemini-2-5-Flash", "React-18", "Node-20", "Python-3-12"
+  GOOD: "Gemini-API", "React", "Node-Runtime", "Python"
+- **NEVER** use vendor-specific service names that may be renamed.
+  BAD: "Cloud-Run", "Vercel-Edge", "AWS-Lambda"
+  GOOD: "Container-Deployment", "Serverless-Compute", "Edge-Runtime"
+- **NEVER** use vague compound descriptions as tags.
+  BAD: "Web-Service-Optimization", "Local-Infrastructure-Dev"
+  GOOD: "Performance-Engineering", "Developer-Experience", "Local-Dev-Environment"
+- **ALWAYS** prefer concept-level nouns over action phrases.
+  BAD: "Optimizing-Build-Speed"
+  GOOD: "Build-Optimization"
+- Tags must be English, hyphen-separated, Title-Case-Words.
 `.trim();
 
 export const OUTPUT_JSON_SCHEMA = {
   type: 'object',
   properties: {
     title: { type: 'string' },
+    slug: { type: 'string', description: 'Short English-only hyphen-separated string for the filename' },
     markdown: { type: 'string' },
     graph: {
       type: 'object',
@@ -112,7 +157,7 @@ export const OUTPUT_JSON_SCHEMA = {
       required: ['nodes', 'edges'],
     },
   },
-  required: ['title', 'markdown', 'graph'],
+  required: ['title', 'slug', 'markdown', 'graph'],
 };
 
 export async function generateKnowledgeNode(payload) {
@@ -169,7 +214,7 @@ export async function applyKnowledgeProposal(proposal) {
 }
 
 export async function fetchWorkspaceIntegrity() {
-  const response = await fetch('/api/workspace-status');
+  const response = await fetch('/api/workspace-status', { cache: 'no-store' });
   const data = await response.json().catch(() => null);
 
   if (!response.ok) {
@@ -180,7 +225,7 @@ export async function fetchWorkspaceIntegrity() {
 }
 
 export async function fetchWorkspaceSnapshot() {
-  const response = await fetch('/api/workspace-snapshot');
+  const response = await fetch('/api/workspace-snapshot', { cache: 'no-store' });
   const data = await response.json().catch(() => null);
 
   if (!response.ok) {
@@ -191,7 +236,9 @@ export async function fetchWorkspaceSnapshot() {
 }
 
 export async function fetchWorkspaceNode(nodePath) {
-  const response = await fetch(`/api/workspace-node?path=${encodeURIComponent(nodePath)}`);
+  const response = await fetch(`/api/workspace-node?path=${encodeURIComponent(nodePath)}`, {
+    cache: 'no-store',
+  });
   const data = await response.json().catch(() => null);
 
   if (!response.ok) {

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "updated_at": "2026-04-14T00:00:00.000Z",
+  "classification_weights": {
+    "Projects": 1,
+    "Topics": 1,
+    "Decisions": 1,
+    "Skills": 1,
+    "Views": 1
+  },
+  "boundary_adjustments": [],
+  "auto_apply_thresholds": {
+    "link_addition": 0.84,
+    "minor_summary_update": 0.9,
+    "new_node_creation": 0.78,
+    "folder_move": 0.95,
+    "refactor_proposal": 0.92
+  }
+}

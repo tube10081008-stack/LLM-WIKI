@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312e81" /> <!-- Indigo 900 -->
+      <stop offset="50%" stop-color="#4c1d95" /> <!-- Violet 900 -->
+      <stop offset="100%" stop-color="#1e1b4b" /> <!-- Indigo 950 -->
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="114" fill="url(#bg-gradient)" />
+  
+  <!-- Outer Ring (Network) -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-dasharray="12 12" opacity="0.6" />
+  
+  <!-- Nodes and Connecting Lines -->
+  <g stroke="#a78bfa" stroke-width="4" stroke-linecap="round" fill="none">
+    <!-- Center to Top Right -->
+    <path d="M 256,256 L 336,160" />
+    <!-- Center to Top Left -->
+    <path d="M 256,256 L 160,176" />
+    <!-- Center to Bottom -->
+    <path d="M 256,256 L 256,368" />
+    <!-- Center to Left -->
+    <path d="M 256,256 L 128,288" />
+    <!-- Center to Right -->
+    <path d="M 256,256 L 384,288" />
+    <!-- Cross Connections -->
+    <path d="M 160,176 L 128,288" stroke-dasharray="6 6" opacity="0.5" />
+    <path d="M 336,160 L 384,288" stroke-dasharray="6 6" opacity="0.5" />
+    <path d="M 128,288 L 256,368" stroke-dasharray="6 6" opacity="0.5" />
+    <path d="M 384,288 L 256,368" stroke-dasharray="6 6" opacity="0.5" />
+  </g>
+
+  <!-- Glowing Nodes (Knowledge Points) -->
+  <g filter="url(#glow)">
+    <circle cx="256" cy="256" r="32" fill="#c4b5fd" /> <!-- Center -->
+    <circle cx="336" cy="160" r="20" fill="#a78bfa" /> <!-- Top Right -->
+    <circle cx="160" cy="176" r="16" fill="#8b5cf6" /> <!-- Top Left -->
+    <circle cx="256" cy="368" r="24" fill="#a78bfa" /> <!-- Bottom -->
+    <circle cx="128" cy="288" r="18" fill="#8b5cf6" /> <!-- Left -->
+    <circle cx="384" cy="288" r="18" fill="#c4b5fd" /> <!-- Right -->
+  </g>
+
+  <!-- Inner Center detail -->
+  <circle cx="256" cy="256" r="12" fill="#4c1d95" />
+</svg>

@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-16T02:23:49.323Z",
+  "node_count": 7,
+  "edge_count": 21,
+  "nodes": [
+    {
+      "id": "node_skill_band-cover-ai-pipeline",
+      "label": "Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템",
+      "node_kind": "wiki",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/band-cover-ai-pipeline.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_skill_untitled",
+      "label": "로컬 서버 데스크톱 앱 패키징 기법",
+      "node_kind": "wiki",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/local-desktop-app-packaging.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_topic_hongsam-identity-core",
+      "label": "홍삼의 자기 정의와 가치관",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Identity/hongsam-identity-core.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_topic_modern-definition-of-ubermensch",
+      "label": "초인(Übermensch)의 현대적 정의와 실천",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/modern-definition-of-ubermensch.md",
+      "status": "draft"
+    },
+    {
+      "id": "cat_skills_development",
+      "label": "Skills / Development",
+      "node_kind": "category",
+      "node_type": "category",
+      "status": "active"
+    },
+    {
+      "id": "cat_topics_identity",
+      "label": "Topics / Identity",
+      "node_kind": "category",
+      "node_type": "category",
+      "status": "active"
+    },
+    {
+      "id": "cat_topics_learnings",
+      "label": "Topics / Learnings",
+      "node_kind": "category",
+      "node_type": "category",
+      "status": "active"
+    }
+  ],
+  "edges": [
+    {
+      "source": "node_skill_band-cover-ai-pipeline",
+      "target": "cat_skills_development",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_band-cover-ai-pipeline",
+      "target": "node_topic_ai-vision",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_band-cover-ai-pipeline",
+      "target": "node_topic_pipeline-automation",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_band-cover-ai-pipeline",
+      "target": "node_topic_container-deployment",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_band-cover-ai-pipeline",
+      "target": "node_topic_media-processing",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_untitled",
+      "target": "cat_skills_development",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_untitled",
+      "target": "node_topic_developer-experience",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_untitled",
+      "target": "node_topic_desktop-automation",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_untitled",
+      "target": "node_topic_pwa",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_untitled",
+      "target": "node_topic_local-dev-environment",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_hongsam-identity-core",
+      "target": "cat_topics_identity",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_hongsam-identity-core",
+      "target": "node_topic_adhd-work-efficiency",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_hongsam-identity-core",
+      "target": "node_topic_foolishness-philosophy",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_hongsam-identity-core",
+      "target": "node_topic_social-impact-small-steps",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_hongsam-identity-core",
+      "target": "node_topic_adhd",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_modern-definition-of-ubermensch",
+      "target": "cat_topics_learnings",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_modern-definition-of-ubermensch",
+      "target": "node_topic_untitled",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_band-cover-ai-pipeline",
+      "target": "node_skill_band-cover-ai-pipeline",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_untitled",
+      "target": "node_skill_untitled",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_hongsam-identity-core",
+      "target": "node_topic_hongsam-identity-core",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_modern-definition-of-ubermensch",
+      "target": "node_topic_modern-definition-of-ubermensch",
+      "relation": "wikilink",
+      "weight": 1
+    }
+  ]
+}

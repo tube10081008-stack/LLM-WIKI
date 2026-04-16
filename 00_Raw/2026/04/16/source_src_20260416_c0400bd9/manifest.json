@@ -1,0 +1,31 @@
+{
+  "source_id": "src_20260416_c0400bd9",
+  "schema_version": 1,
+  "created_at": "2026-04-16T01:06:41.419Z",
+  "source_type": "mixed",
+  "origin": {
+    "channel": "web_app",
+    "captured_from": "p-reinforce-studio"
+  },
+  "title": "Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템",
+  "description": "Captured from Studio as development-code.",
+  "sha256": "c190a6ac605f7dda3eac10cc5ef115bb9c354864442a8f8b790599829edf6874",
+  "raw_root": "00_Raw/2026/04/16/source_src_20260416_c0400bd9",
+  "text_path": "00_Raw/2026/04/16/source_src_20260416_c0400bd9/source.md",
+  "attachments": [
+    {
+      "attachment_id": "att_fb98b91",
+      "path": "00_Raw/2026/04/16/source_src_20260416_c0400bd9/attachments/att_fb98b91.jpg",
+      "mime_type": "image/jpeg",
+      "sha256": "369161bc3ec8cd58762159a697d1d611f6cd16729bb9146fdf8a8c8d0d0a5095",
+      "size_bytes": 8138
+    }
+  ],
+  "tags": [
+    "yt-dlp",
+    "FFmpeg",
+    "Sharp (CV)",
+    "development-code"
+  ],
+  "status": "proposed"
+}

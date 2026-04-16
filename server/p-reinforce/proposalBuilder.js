@@ -12,6 +12,24 @@ import {
 import { slugify } from './utils.js';
 
 const KNOWLEDGE_TYPE_PROFILE = {
+  'personal-identity': {
+    nodeType: 'topic',
+    categoryPath: '10_Wiki/Topics/Identity',
+    categoryLabel: 'Identity',
+    rawSourceType: 'text',
+  },
+  'daily-reflection': {
+    nodeType: 'topic',
+    categoryPath: '10_Wiki/Topics/Journal',
+    categoryLabel: 'Journal',
+    rawSourceType: 'text',
+  },
+  'learning-log': {
+    nodeType: 'topic',
+    categoryPath: '10_Wiki/Topics/Learnings',
+    categoryLabel: 'Learnings',
+    rawSourceType: 'text',
+  },
   'image-prompt': {
     nodeType: 'skill',
     categoryPath: '10_Wiki/Skills/Image-Prompts',
@@ -114,8 +132,9 @@ export async function buildKnowledgeProposal({
     status: 'proposed',
   };
   const relatedNodeIds = relatedTitles.map((item) => createHypotheticalRelatedId(item));
+  const englishSlug = llmResult?.slug || title;
   const wikiFrontmatter = {
-    id: createNodeId(profile.nodeType, title),
+    id: createNodeId(profile.nodeType, englishSlug),
     schema_version: 1,
     node_type: profile.nodeType,
     title,
@@ -126,7 +145,7 @@ export async function buildKnowledgeProposal({
     last_reinforced: dateStamp,
     category_path: profile.categoryPath,
     source_refs: [sourceId],
-    related: relatedNodeIds,
+    related: Array.from(new Set(relatedNodeIds)),
     contradicts: [],
     policy_version: 1,
     aliases: legacy.title && legacy.title !== title ? [legacy.title] : undefined,
@@ -146,7 +165,7 @@ export async function buildKnowledgeProposal({
     tags,
     relatedTitles,
   });
-  const wikiPath = buildWikiPath(profile.categoryPath, title);
+  const wikiPath = buildWikiPath(profile.categoryPath, englishSlug);
   const sourceText = buildSourceDocument({
     title,
     knowledgeType,

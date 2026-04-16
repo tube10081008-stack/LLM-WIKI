@@ -6,5 +6,12 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5173,
+    watch: {
+      ignored: [
+        '**/00_Raw/**',
+        '**/10_Wiki/**',
+        '**/90_System/**'
+      ]
+    }
   },
 });
