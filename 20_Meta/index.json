@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:42:36.780Z",
-  "node_count": 5,
+  "generated_at": "2026-04-17T10:44:27.603Z",
+  "node_count": 6,
   "entries": [
     {
       "node_id": "node_skill_band-cover-ai-pipeline",
@@ -22,6 +22,16 @@
       "updated_at": "2026-04-16",
       "source_ref_count": 1,
       "summary": "이 기법은 Node.js 기반의 로컬 웹 서비스를 터미널 조작 없이 바탕화면 아이콘 하나로 실행 가능하도록 데스크톱 네이티브 앱처럼 패키징하는 자동화 방법론입니다. PWA 설정, 배치 스크립트, 그리고 커스텀 아이콘 바로가기 생성을 결합하여 사용자 경험을 극대화합니다."
+    },
+    {
+      "node_id": "node_skill_scroll-interactive-image-sequence-guide",
+      "title": "스크롤 인터랙티브 이미지 시퀀스 구현 가이드",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/scroll-interactive-image-sequence-guide.md",
+      "status": "draft",
+      "updated_at": "2026-04-17",
+      "source_ref_count": 1,
+      "summary": "Apple 스타일의 하이엔드 브랜드 경험을 제공하기 위한 스크롤 기반 이미지 시퀀스(Scrollytelling) 구현 프레임워크입니다. Next.js 14와 HTML5 Canvas를 활용하여 고해상도 프레임 애니메이션을 부드럽게 렌더링하는 기술적 구조와 디자인 전략을 포함합니다."
     },
     {
       "node_id": "node_skill_website-revision-instruction-framework",

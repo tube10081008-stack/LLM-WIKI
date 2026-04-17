@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:42:36.797Z",
-  "node_count": 8,
-  "edge_count": 27,
+  "generated_at": "2026-04-17T10:44:27.621Z",
+  "node_count": 9,
+  "edge_count": 32,
   "nodes": [
     {
       "id": "node_skill_band-cover-ai-pipeline",
@@ -18,6 +18,14 @@
       "node_kind": "wiki",
       "node_type": "skill",
       "path": "10_Wiki/Skills/Development/local-desktop-app-packaging.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_skill_scroll-interactive-image-sequence-guide",
+      "label": "스크롤 인터랙티브 이미지 시퀀스 구현 가이드",
+      "node_kind": "wiki",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/scroll-interactive-image-sequence-guide.md",
       "status": "draft"
     },
     {
@@ -128,6 +136,30 @@
       "weight": 1
     },
     {
+      "source": "node_skill_scroll-interactive-image-sequence-guide",
+      "target": "cat_skills_development",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_scroll-interactive-image-sequence-guide",
+      "target": "node_topic_next-js",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_scroll-interactive-image-sequence-guide",
+      "target": "node_topic_framer-motion",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_scroll-interactive-image-sequence-guide",
+      "target": "node_topic_gsap-scrolltrigger",
+      "relation": "related",
+      "weight": 1
+    },
+    {
       "source": "node_skill_website-revision-instruction-framework",
       "target": "cat_skills_development",
       "relation": "parent_category",
@@ -208,6 +240,12 @@
     {
       "source": "node_skill_untitled",
       "target": "node_skill_untitled",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_scroll-interactive-image-sequence-guide",
+      "target": "node_skill_scroll-interactive-image-sequence-guide",
       "relation": "wikilink",
       "weight": 1
     },
