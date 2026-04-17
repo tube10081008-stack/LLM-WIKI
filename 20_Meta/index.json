@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:44:27.603Z",
-  "node_count": 6,
+  "generated_at": "2026-04-17T10:45:43.685Z",
+  "node_count": 7,
   "entries": [
     {
       "node_id": "node_skill_band-cover-ai-pipeline",
@@ -12,6 +12,16 @@
       "updated_at": "2026-04-16",
       "source_ref_count": 1,
       "summary": "유튜브 URL 혹은 로컬 영상을 입력받아 **yt-dlp**와 **FFmpeg**로 프레임을 추출하고, **4단계 필터링 파이프라인**과 **Gemini 2.5 Flash Vision** AI를 통해 악기별(보컬, 기타, 베이스, 피아노, 드럼) 최적의 프레임을 자동 선별하는 시스템입니다."
+    },
+    {
+      "node_id": "node_skill_essential-elements-of-website-planning",
+      "title": "웹사이트 기획 필수 요소",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/essential-elements-of-website-planning.md",
+      "status": "draft",
+      "updated_at": "2026-04-17",
+      "source_ref_count": 1,
+      "summary": "웹사이트 개발을 시작하기 전, 프로젝트의 방향성을 정의하고 일관된 결과물을 도출하기 위해 반드시 정리해야 할 4가지 필수 구성 요소입니다."
     },
     {
       "node_id": "node_skill_untitled",

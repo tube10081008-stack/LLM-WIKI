@@ -1,8 +1,9 @@
 # Index
 
-- generated_at: 2026-04-17T10:44:27.603Z
+- generated_at: 2026-04-17T10:45:43.685Z
 
 - [[Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템]] (skill) -> 10_Wiki/Skills/Development/band-cover-ai-pipeline.md
+- [[웹사이트 기획 필수 요소]] (skill) -> 10_Wiki/Skills/Development/essential-elements-of-website-planning.md
 - [[로컬 서버 데스크톱 앱 패키징 기법]] (skill) -> 10_Wiki/Skills/Development/local-desktop-app-packaging.md
 - [[스크롤 인터랙티브 이미지 시퀀스 구현 가이드]] (skill) -> 10_Wiki/Skills/Development/scroll-interactive-image-sequence-guide.md
 - [[웹사이트 수정을 위한 3단계 지시 프레임워크]] (skill) -> 10_Wiki/Skills/Development/website-revision-instruction-framework.md

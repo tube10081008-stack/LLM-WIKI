@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:44:27.621Z",
-  "node_count": 9,
-  "edge_count": 32,
+  "generated_at": "2026-04-17T10:45:43.703Z",
+  "node_count": 10,
+  "edge_count": 37,
   "nodes": [
     {
       "id": "node_skill_band-cover-ai-pipeline",
@@ -10,6 +10,14 @@
       "node_kind": "wiki",
       "node_type": "skill",
       "path": "10_Wiki/Skills/Development/band-cover-ai-pipeline.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_skill_essential-elements-of-website-planning",
+      "label": "웹사이트 기획 필수 요소",
+      "node_kind": "wiki",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Development/essential-elements-of-website-planning.md",
       "status": "draft"
     },
     {
@@ -102,6 +110,30 @@
     {
       "source": "node_skill_band-cover-ai-pipeline",
       "target": "node_topic_media-processing",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_essential-elements-of-website-planning",
+      "target": "cat_skills_development",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_essential-elements-of-website-planning",
+      "target": "node_topic_project-requirements-template",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_essential-elements-of-website-planning",
+      "target": "node_topic_brand-identity-design-guide",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_essential-elements-of-website-planning",
+      "target": "node_topic_untitled",
       "relation": "related",
       "weight": 1
     },
@@ -234,6 +266,12 @@
     {
       "source": "node_skill_band-cover-ai-pipeline",
       "target": "node_skill_band-cover-ai-pipeline",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_essential-elements-of-website-planning",
+      "target": "node_skill_essential-elements-of-website-planning",
       "relation": "wikilink",
       "weight": 1
     },
