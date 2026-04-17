@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:46:52.908Z",
-  "node_count": 8,
+  "generated_at": "2026-04-17T10:48:39.316Z",
+  "node_count": 9,
   "entries": [
     {
       "node_id": "node_skill_band-cover-ai-pipeline",
@@ -62,6 +62,16 @@
       "updated_at": "2026-04-17",
       "source_ref_count": 1,
       "summary": "이 프레임워크는 원본 이미지를 다각도(제품 상세, 카메라 구도, 환경 맥락, 조명 및 분위기)에서 체계적으로 분석하여 구조화된 JSON 데이터로 변환하기 위한 마스터 프롬프트입니다. 이는 AI 모델이 이미지의 시각적 요소를 정밀하게 이해하고 일관성 있는 이미지 생성을 위한 '프롬프트 역설계'를 가능하게 합니다."
+    },
+    {
+      "node_id": "node_skill_infographic-generation-master-prompts",
+      "title": "인포그래픽 생성 마스터 프롬프트 가이드",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Image-Prompts/infographic-generation-master-prompts.md",
+      "status": "draft",
+      "updated_at": "2026-04-17",
+      "source_ref_count": 1,
+      "summary": "이 노드는 복잡한 데이터나 프로세스를 시각화하기 위한 세 가지 주요 인포그래픽 스타일(여정/마일스톤, 구조 분해, 3D 뉴모피즘)의 프롬프트 구조와 예시를 다룹니다."
     },
     {
       "node_id": "node_topic_hongsam-identity-core",

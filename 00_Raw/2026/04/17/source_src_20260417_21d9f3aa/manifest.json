@@ -1,0 +1,23 @@
+{
+  "source_id": "src_20260417_21d9f3aa",
+  "schema_version": 1,
+  "created_at": "2026-04-17T10:48:20.269Z",
+  "source_type": "mixed",
+  "origin": {
+    "channel": "web_app",
+    "captured_from": "p-reinforce-studio"
+  },
+  "title": "인포그래픽 생성 마스터 프롬프트 가이드",
+  "description": "Captured from Studio as image-prompt.",
+  "sha256": "b32d9a200f2e9152e77461497719f8dc72ff1d10ca0c931f9c8f697059ffc5b6",
+  "raw_root": "00_Raw/2026/04/17/source_src_20260417_21d9f3aa",
+  "text_path": "00_Raw/2026/04/17/source_src_20260417_21d9f3aa/source.md",
+  "attachments": [],
+  "tags": [
+    "Generative-AI",
+    "Design-Pattern",
+    "Information-Architecture",
+    "image-prompt"
+  ],
+  "status": "proposed"
+}

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:46:52.972Z",
-  "node_count": 12,
-  "edge_count": 40,
+  "generated_at": "2026-04-17T10:48:39.333Z",
+  "node_count": 13,
+  "edge_count": 46,
   "nodes": [
     {
       "id": "node_skill_band-cover-ai-pipeline",
@@ -50,6 +50,14 @@
       "node_kind": "wiki",
       "node_type": "skill",
       "path": "10_Wiki/Skills/Image-Prompts/image-generation-analysis-framework.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_skill_infographic-generation-master-prompts",
+      "label": "인포그래픽 생성 마스터 프롬프트 가이드",
+      "node_kind": "wiki",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Image-Prompts/infographic-generation-master-prompts.md",
       "status": "draft"
     },
     {
@@ -249,6 +257,36 @@
       "weight": 1
     },
     {
+      "source": "node_skill_infographic-generation-master-prompts",
+      "target": "cat_skills_image-prompts",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_infographic-generation-master-prompts",
+      "target": "node_topic_midjourney-parameter-guide",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_infographic-generation-master-prompts",
+      "target": "node_topic_visual-storytelling-techniques",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_infographic-generation-master-prompts",
+      "target": "node_topic_ux-ui-design-trends",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_infographic-generation-master-prompts",
+      "target": "node_topic_untitled",
+      "relation": "related",
+      "weight": 1
+    },
+    {
       "source": "node_topic_hongsam-identity-core",
       "target": "cat_topics_identity",
       "relation": "parent_category",
@@ -323,6 +361,12 @@
     {
       "source": "node_skill_image-generation-analysis-framework",
       "target": "node_skill_image-generation-analysis-framework",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_infographic-generation-master-prompts",
+      "target": "node_skill_infographic-generation-master-prompts",
       "relation": "wikilink",
       "weight": 1
     },
