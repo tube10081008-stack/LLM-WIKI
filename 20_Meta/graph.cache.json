@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:45:43.703Z",
-  "node_count": 10,
-  "edge_count": 37,
+  "generated_at": "2026-04-17T10:46:52.972Z",
+  "node_count": 12,
+  "edge_count": 40,
   "nodes": [
     {
       "id": "node_skill_band-cover-ai-pipeline",
@@ -45,6 +45,14 @@
       "status": "draft"
     },
     {
+      "id": "node_skill_image-generation-analysis-framework",
+      "label": "이미지 생성 분석 마스터 프롬프트 프레임워크",
+      "node_kind": "wiki",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Image-Prompts/image-generation-analysis-framework.md",
+      "status": "draft"
+    },
+    {
       "id": "node_topic_hongsam-identity-core",
       "label": "홍삼의 자기 정의와 가치관",
       "node_kind": "wiki",
@@ -63,6 +71,13 @@
     {
       "id": "cat_skills_development",
       "label": "Skills / Development",
+      "node_kind": "category",
+      "node_type": "category",
+      "status": "active"
+    },
+    {
+      "id": "cat_skills_image-prompts",
+      "label": "Skills / Image-Prompts",
       "node_kind": "category",
       "node_type": "category",
       "status": "active"
@@ -222,6 +237,18 @@
       "weight": 1
     },
     {
+      "source": "node_skill_image-generation-analysis-framework",
+      "target": "cat_skills_image-prompts",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_image-generation-analysis-framework",
+      "target": "node_topic_untitled",
+      "relation": "related",
+      "weight": 1
+    },
+    {
       "source": "node_topic_hongsam-identity-core",
       "target": "cat_topics_identity",
       "relation": "parent_category",
@@ -290,6 +317,12 @@
     {
       "source": "node_skill_website-revision-instruction-framework",
       "target": "node_skill_website-revision-instruction-framework",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_skill_image-generation-analysis-framework",
+      "target": "node_skill_image-generation-analysis-framework",
       "relation": "wikilink",
       "weight": 1
     },

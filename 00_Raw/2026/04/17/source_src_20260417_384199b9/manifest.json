@@ -1,0 +1,23 @@
+{
+  "source_id": "src_20260417_384199b9",
+  "schema_version": 1,
+  "created_at": "2026-04-17T10:46:41.035Z",
+  "source_type": "mixed",
+  "origin": {
+    "channel": "web_app",
+    "captured_from": "p-reinforce-studio"
+  },
+  "title": "이미지 생성 분석 마스터 프롬프트 프레임워크",
+  "description": "Captured from Studio as image-prompt.",
+  "sha256": "2fb536d66f5ed8379f5b201a9fd61a942f971c6246071c7582977cb7f715d89f",
+  "raw_root": "00_Raw/2026/04/17/source_src_20260417_384199b9",
+  "text_path": "00_Raw/2026/04/17/source_src_20260417_384199b9/source.md",
+  "attachments": [],
+  "tags": [
+    "Generative-AI",
+    "Computer-Vision",
+    "Prompt-Engineering",
+    "image-prompt"
+  ],
+  "status": "proposed"
+}

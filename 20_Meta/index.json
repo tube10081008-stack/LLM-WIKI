@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:45:43.685Z",
-  "node_count": 7,
+  "generated_at": "2026-04-17T10:46:52.908Z",
+  "node_count": 8,
   "entries": [
     {
       "node_id": "node_skill_band-cover-ai-pipeline",
@@ -52,6 +52,16 @@
       "updated_at": "2026-04-17",
       "source_ref_count": 1,
       "summary": "웹사이트 수정 요청 시 의사소통의 오류를 줄이고 정확한 결과물을 얻기 위해 '타겟-지시-키워드'로 구성된 3단계 프레임워크를 활용한다."
+    },
+    {
+      "node_id": "node_skill_image-generation-analysis-framework",
+      "title": "이미지 생성 분석 마스터 프롬프트 프레임워크",
+      "node_type": "skill",
+      "path": "10_Wiki/Skills/Image-Prompts/image-generation-analysis-framework.md",
+      "status": "draft",
+      "updated_at": "2026-04-17",
+      "source_ref_count": 1,
+      "summary": "이 프레임워크는 원본 이미지를 다각도(제품 상세, 카메라 구도, 환경 맥락, 조명 및 분위기)에서 체계적으로 분석하여 구조화된 JSON 데이터로 변환하기 위한 마스터 프롬프트입니다. 이는 AI 모델이 이미지의 시각적 요소를 정밀하게 이해하고 일관성 있는 이미지 생성을 위한 '프롬프트 역설계'를 가능하게 합니다."
     },
     {
       "node_id": "node_topic_hongsam-identity-core",
