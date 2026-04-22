@@ -70,34 +70,47 @@ Rules:
    - title
    - date
    - knowledge_type
-   - tags
-   - connected_nodes
+   - tags (clean string array, NO wiki-link syntax here)
+   - connected_nodes (clean slug array, NO wiki-link syntax here)
 6. The markdown body must be written in Korean.
-7. The body structure depends on knowledge_type:
-   - For "personal-identity": 나는 누구인가 (자기 정의), 핵심 가치관/성격, 취향과 선호, 경험에서 온 신념, 현재 목표
-   - For "daily-reflection": 오늘의 감정/상태, 관찰한 것, 떠오른 생각, 연결된 과거 경험, 내일 해볼 것
-   - For "learning-log": 핵심 교훈 한 줄, 배운 맥락 (어디서/어떻게), 구체적 내용 정리, 내 삶에 적용할 점, 더 탐구할 질문
-   - For all other types: 핵심 요약, 추출 포인트, 다음 액션
+7. The markdown body MUST ALWAYS contain the following three global sections in order, regardless of knowledge_type:
+
+   **Global Section 1:** "## 📌 한 줄 통찰 (The Karpathy Summary)"
+   → A single profound sentence capturing the absolute essence. This is the most important line of the entire document.
+
+   **Global Section 2:** "## 📖 구조화된 지식 (Synthesized Content)"
+   → This section's internal structure depends on knowledge_type:
+     - For "personal-identity": 나는 누구인가 (자기 정의), 핵심 가치관/성격, 취향과 선호, 경험에서 온 신념, 현재 목표
+     - For "daily-reflection": 오늘의 감정/상태, 관찰한 것, 떠오른 생각, 연결된 과거 경험, 내일 해볼 것
+     - For "learning-log": 핵심 교훈 한 줄, 배운 맥락 (어디서/어떻게), 구체적 내용 정리, 내 삶에 적용할 점, 더 탐구할 질문
+     - For all other types: 핵심 요약, 추출 포인트, 다음 액션
+
+   **Global Section 3:** "## ⚠️ 모순 및 업데이트 (Contradictions & RL Update)"
+   → Note any conflicts with common sense, existing knowledge, or potential future updates.
+   → If no contradictions exist, write "현재 식별된 모순 없음." and suggest one future verification point.
+
 8. The graph must place the newly created node at the center and connect category, tags, and related nodes.
 9. Use role values only from:
    - core
    - category
    - tag
    - related
-9. When images are attached, incorporate visible information into the markdown and graph.
-10. Do not wrap the JSON in markdown fences.
+10. When images are attached, incorporate visible information into the markdown and graph.
+11. Do not wrap the JSON in markdown fences.
+12. When referencing other knowledge nodes or concepts inside the markdown BODY text (not frontmatter), use Obsidian wiki-link format: [[slug-name]]. This enables cross-node navigation in local markdown tools.
 
 ## Tag Design Principles (CRITICAL — read carefully)
 
 This knowledge graph will scale to 100,000+ nodes over 10 years.
+It stores not only software engineering knowledge, but also philosophy, personal identity, daily reflections, business insights, art, and more.
 Tags must be **timeless, concept-level, and reusable** across the entire graph.
 
 ### 3-Tier Tag Hierarchy (pick 3–5 tags, mixing tiers):
 | Tier | Scope | Examples |
 | --- | --- | --- |
-| Domain (분야) | Broadest umbrella. Rarely changes. | AI-ML, DevOps, Frontend, Backend, Data-Engineering, Design, Education |
-| Pattern (패턴) | Reusable technique or approach. | Pipeline-Automation, Real-Time-Processing, Container-Deployment, CI-CD, Caching-Strategy |
-| Tech-Family (기술군) | Product family WITHOUT version. | Gemini-API, FFmpeg, Docker, React, Node-Runtime, PWA |
+| Domain (분야) | Broadest umbrella. Rarely changes. Covers ALL fields of human knowledge. | AI-ML, DevOps, Frontend, Philosophy, Psychology, Business-Strategy, Design, Education, Self-Development, Content-Creation |
+| Pattern (패턴) | Reusable technique, methodology, or approach applicable across domains. | Pipeline-Automation, Real-Time-Processing, Mental-Model, Decision-Framework, Habit-Engineering, Storytelling, Critical-Thinking |
+| Entity (개체) | Specific concept, framework, tool, or thinker WITHOUT version numbers. | Gemini-API, FFmpeg, Docker, React, Nietzsche, Stoicism, ADHD, Analog-Aesthetic, Literacy-Education |
 
 ### STRICT RULES:
 - **NEVER** include version numbers in tags.
@@ -113,6 +126,9 @@ Tags must be **timeless, concept-level, and reusable** across the entire graph.
   BAD: "Optimizing-Build-Speed"
   GOOD: "Build-Optimization"
 - Tags must be English, hyphen-separated, Title-Case-Words.
+- **PREFER reusing existing tags** over inventing new ones. If the user's Existing Tags list is provided below, choose from that list whenever a tag with the same or very similar meaning exists.
+
+\${EXISTING_TAGS_SLOT}
 `.trim();
 
 export const OUTPUT_JSON_SCHEMA = {

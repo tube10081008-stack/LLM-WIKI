@@ -29,6 +29,43 @@ export default async function handler(request, response) {
         message,
       })),
     ];
+
+    try {
+      const { executeGitCheckpoint, pushGitCheckpoint } = await import('../server/p-reinforce/gitAutomation.js');
+      const checkpoint = await executeGitCheckpoint({ commitMessage: `auto: node apply - ${proposal.frontmatter.title}` });
+      
+      let push = null;
+      if (checkpoint.committed || checkpoint.reason === 'clean_workspace') {
+        push = await pushGitCheckpoint({ remote: 'origin' });
+      }
+
+      if (push && !push.pushed) {
+        reflection.push({
+          severity: 'warning',
+          code: 'auto_git_push_failed',
+          message: `Auto-push failed: ${push.message}`,
+        });
+      } else if (push && push.pushed) {
+        reflection.push({
+          severity: 'info',
+          code: 'auto_git_push_success',
+          message: 'Workspace successfully backed up to GitHub.',
+        });
+      } else if (checkpoint.committed) {
+        reflection.push({
+          severity: 'info',
+          code: 'auto_git_commit_success',
+          message: `Changes committed locally: ${checkpoint.message}`,
+        });
+      }
+    } catch (gitError) {
+      reflection.push({
+        severity: 'warning',
+        code: 'auto_git_error',
+        message: `Failed to automate git tasks: ${gitError.message}`,
+      });
+    }
+
     const integrity = await buildWorkspaceIntegrityReport({ reflection });
 
     return response.status(200).json({

@@ -1,3 +1,5 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import {
   GEMINI_MODEL,
   OUTPUT_JSON_SCHEMA,
@@ -9,6 +11,7 @@ import {
   serializeProposalForApply,
 } from '../server/p-reinforce/proposalBuilder.js';
 import { buildWorkspaceIntegrityReport } from '../server/p-reinforce/roadmap.js';
+import { getStorageDescriptor } from '../server/p-reinforce/persistence.js';
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
 
@@ -52,6 +55,24 @@ export default async function handler(request, response) {
     ];
 
     const model = process.env.GEMINI_MODEL || GEMINI_MODEL;
+
+    // --- Existing Tags Injection ---
+    let existingTagsBlock = '';
+    try {
+      const storage = getStorageDescriptor();
+      const graphCachePath = path.resolve(storage.workspaceRoot, '20_Meta', 'graph.cache.json');
+      const raw = await fs.readFile(graphCachePath, 'utf-8');
+      const graphCache = JSON.parse(raw);
+      const tagNodes = (graphCache.nodes ?? []).filter((n) => n.node_kind === 'tag');
+      if (tagNodes.length > 0) {
+        const tagList = tagNodes.map((n) => n.label).slice(0, 150).join(', ');
+        existingTagsBlock = `\n## Existing Tags in this Garden (PREFER reusing these)\n${tagList}`;
+      }
+    } catch {
+      // graph cache not yet available — skip injection
+    }
+    const finalSystemPrompt = SYSTEM_PROMPT_TEMPLATE.replace('${EXISTING_TAGS_SLOT}', existingTagsBlock);
+
     const geminiResponse = await fetch(`${GEMINI_API_URL}/${model}:generateContent`, {
       method: 'POST',
       headers: {
@@ -60,7 +81,7 @@ export default async function handler(request, response) {
       },
       body: JSON.stringify({
         systemInstruction: {
-          parts: [{ text: SYSTEM_PROMPT_TEMPLATE }],
+          parts: [{ text: finalSystemPrompt }],
         },
         contents: [
           {
