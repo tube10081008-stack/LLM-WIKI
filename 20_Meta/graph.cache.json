@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:48:39.333Z",
-  "node_count": 13,
-  "edge_count": 46,
+  "generated_at": "2026-04-23T14:25:16.322Z",
+  "node_count": 15,
+  "edge_count": 49,
   "nodes": [
     {
       "id": "node_skill_band-cover-ai-pipeline",
@@ -69,6 +69,14 @@
       "status": "draft"
     },
     {
+      "id": "node_topic_rethinking-thinking-personality-type",
+      "label": "T 성향에 대한 새로운 통찰: 생존과 배려의 관점",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Journal/rethinking-thinking-personality-type.md",
+      "status": "draft"
+    },
+    {
       "id": "node_topic_modern-definition-of-ubermensch",
       "label": "초인(Übermensch)의 현대적 정의와 실천",
       "node_kind": "wiki",
@@ -93,6 +101,13 @@
     {
       "id": "cat_topics_identity",
       "label": "Topics / Identity",
+      "node_kind": "category",
+      "node_type": "category",
+      "status": "active"
+    },
+    {
+      "id": "cat_topics_journal",
+      "label": "Topics / Journal",
       "node_kind": "category",
       "node_type": "category",
       "status": "active"
@@ -317,6 +332,18 @@
       "weight": 1
     },
     {
+      "source": "node_topic_rethinking-thinking-personality-type",
+      "target": "cat_topics_journal",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_rethinking-thinking-personality-type",
+      "target": "node_topic_mbti",
+      "relation": "related",
+      "weight": 1
+    },
+    {
       "source": "node_topic_modern-definition-of-ubermensch",
       "target": "cat_topics_learnings",
       "relation": "parent_category",
@@ -373,6 +400,12 @@
     {
       "source": "node_topic_hongsam-identity-core",
       "target": "node_topic_hongsam-identity-core",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_rethinking-thinking-personality-type",
+      "target": "node_topic_rethinking-thinking-personality-type",
       "relation": "wikilink",
       "weight": 1
     },

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-17T10:48:39.316Z",
-  "node_count": 9,
+  "generated_at": "2026-04-23T14:25:16.305Z",
+  "node_count": 10,
   "entries": [
     {
       "node_id": "node_skill_band-cover-ai-pipeline",
@@ -82,6 +82,16 @@
       "updated_at": "2026-04-16",
       "source_ref_count": 1,
       "summary": "나는 '홍삼'이다. ADHD라는 특성을 가지고 있으며, 이는 나에게 있어 시작의 에너지를 상징한다. 어떤 일이든 '첫 삽'을 뜰 때 그 누구보다 폭발적인 몰입도와 추진력을 발휘하는 사람이다."
+    },
+    {
+      "node_id": "node_topic_rethinking-thinking-personality-type",
+      "title": "T 성향에 대한 새로운 통찰: 생존과 배려의 관점",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Journal/rethinking-thinking-personality-type.md",
+      "status": "draft",
+      "updated_at": "2026-04-23",
+      "source_ref_count": 1,
+      "summary": "사고형(T) 성향은 감정의 결여가 아니라, 현실적인 문제 해결을 통해 타인의 실질적 생존과 안녕을 돕는 또 다른 형태의 배려다."
     },
     {
       "node_id": "node_topic_modern-definition-of-ubermensch",

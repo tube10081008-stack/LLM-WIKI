@@ -1,0 +1,23 @@
+{
+  "source_id": "src_20260423_8b76aafb",
+  "schema_version": 1,
+  "created_at": "2026-04-23T14:25:07.764Z",
+  "source_type": "text",
+  "origin": {
+    "channel": "web_app",
+    "captured_from": "p-reinforce-studio"
+  },
+  "title": "T 성향에 대한 새로운 통찰: 생존과 배려의 관점",
+  "description": "Captured from Studio as daily-reflection.",
+  "sha256": "c74bd480889f5e9909b1ed3e19bff1fbb7881dc6545daabb013725bb9db63c80",
+  "raw_root": "00_Raw/2026/04/23/source_src_20260423_8b76aafb",
+  "text_path": "00_Raw/2026/04/23/source_src_20260423_8b76aafb/source.md",
+  "attachments": [],
+  "tags": [
+    "Psychology",
+    "Mental-Model",
+    "Self-Development",
+    "daily-reflection"
+  ],
+  "status": "proposed"
+}
