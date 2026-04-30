@@ -1,7 +1,8 @@
 # Index
 
-- generated_at: 2026-04-23T14:25:16.305Z
+- generated_at: 2026-04-30T12:37:15.221Z
 
+- [[유튜브 알고리즘 마스터피스의 본질]] (project) -> 10_Wiki/Projects/Content-Systems/youtube-algorithm-masterpiece-essence.md
 - [[Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템]] (skill) -> 10_Wiki/Skills/Development/band-cover-ai-pipeline.md
 - [[웹사이트 기획 필수 요소]] (skill) -> 10_Wiki/Skills/Development/essential-elements-of-website-planning.md
 - [[로컬 서버 데스크톱 앱 패키징 기법]] (skill) -> 10_Wiki/Skills/Development/local-desktop-app-packaging.md

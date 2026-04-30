@@ -1,8 +1,18 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-23T14:25:16.305Z",
-  "node_count": 10,
+  "generated_at": "2026-04-30T12:37:15.221Z",
+  "node_count": 11,
   "entries": [
+    {
+      "node_id": "node_project_youtube-algorithm-masterpiece-essence",
+      "title": "유튜브 알고리즘 마스터피스의 본질",
+      "node_type": "project",
+      "path": "10_Wiki/Projects/Content-Systems/youtube-algorithm-masterpiece-essence.md",
+      "status": "draft",
+      "updated_at": "2026-04-30",
+      "source_ref_count": 1,
+      "summary": "유튜브 알고리즘의 모든 수학적 지표를 관통하는 단 하나의 본질은 기술적 트릭이 아닌, 시청자와의 '신뢰' 구축과 '명확한 문제 해결'에 기반한 고품질 경험의 구조화이다."
+    },
     {
       "node_id": "node_skill_band-cover-ai-pipeline",
       "title": "Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템",

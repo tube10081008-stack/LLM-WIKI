@@ -1,9 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-23T14:25:16.322Z",
-  "node_count": 15,
-  "edge_count": 49,
+  "generated_at": "2026-04-30T12:37:15.234Z",
+  "node_count": 17,
+  "edge_count": 53,
   "nodes": [
+    {
+      "id": "node_project_youtube-algorithm-masterpiece-essence",
+      "label": "유튜브 알고리즘 마스터피스의 본질",
+      "node_kind": "wiki",
+      "node_type": "project",
+      "path": "10_Wiki/Projects/Content-Systems/youtube-algorithm-masterpiece-essence.md",
+      "status": "draft"
+    },
     {
       "id": "node_skill_band-cover-ai-pipeline",
       "label": "Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템",
@@ -85,6 +93,13 @@
       "status": "draft"
     },
     {
+      "id": "cat_projects_content-systems",
+      "label": "Projects / Content-Systems",
+      "node_kind": "category",
+      "node_type": "category",
+      "status": "active"
+    },
+    {
       "id": "cat_skills_development",
       "label": "Skills / Development",
       "node_kind": "category",
@@ -121,6 +136,24 @@
     }
   ],
   "edges": [
+    {
+      "source": "node_project_youtube-algorithm-masterpiece-essence",
+      "target": "cat_projects_content-systems",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_project_youtube-algorithm-masterpiece-essence",
+      "target": "node_topic_audience-retention-strategy",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_project_youtube-algorithm-masterpiece-essence",
+      "target": "node_topic_youtube-metadata-optimization",
+      "relation": "related",
+      "weight": 1
+    },
     {
       "source": "node_skill_band-cover-ai-pipeline",
       "target": "cat_skills_development",
@@ -353,6 +386,12 @@
       "source": "node_topic_modern-definition-of-ubermensch",
       "target": "node_topic_untitled",
       "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_project_youtube-algorithm-masterpiece-essence",
+      "target": "node_project_youtube-algorithm-masterpiece-essence",
+      "relation": "wikilink",
       "weight": 1
     },
     {
