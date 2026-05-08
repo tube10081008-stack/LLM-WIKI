@@ -13,6 +13,15 @@ source_refs:
   - "src_enex_migration_20190213"
 related:
   - "node_topic_hongsam-identity-core"
+  - "node_topic_philosophy"
+  - "node_topic_life-values"
+  - "node_topic_love-and-relationships"
+  - "node_topic_emotional-intelligence"
+  - "node_topic_health-and-fitness"
+  - "node_topic_personal-growth"
+  - "node_topic_self-reflection"
+  - "node_topic_family-and-roots"
+  - "node_topic_social-impact-small-steps"
 contradicts: []
 policy_version: 1
 ---
