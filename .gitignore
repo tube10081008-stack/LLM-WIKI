@@ -6,3 +6,6 @@ dist
 
 .vercel
 .env*.local
+
+# ENEX source files (too large)
+*.enex
