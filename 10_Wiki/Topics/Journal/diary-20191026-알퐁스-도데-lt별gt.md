@@ -13,13 +13,12 @@ source_refs:
   - "src_enex_migration_20191026"
 related:
   - "node_topic_hongsam-identity-core"
-  - "node_topic_love-and-relationships"
-  - "node_topic_emotional-intelligence"
-  - "node_topic_health-and-fitness"
-  - "node_topic_social-impact-small-steps"
+  - "node_domain_philosophy"
   - "node_topic_foolishness-philosophy"
-  - "node_topic_art-and-music"
-  - "node_topic_expression"
+  - "node_domain_psychology"
+  - "node_pattern_emotional-intelligence"
+  - "node_domain_art"
+  - "node_pattern_habit-engineering"
 contradicts: []
 policy_version: 1
 ---

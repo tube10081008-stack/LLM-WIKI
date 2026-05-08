@@ -13,8 +13,11 @@ source_refs:
   - "src_enex_migration_20210127"
 related:
   - "node_topic_hongsam-identity-core"
-  - "node_topic_love-and-relationships"
-  - "node_topic_emotional-intelligence"
+  - "node_domain_psychology"
+  - "node_topic_mbti"
+  - "node_topic_rethinking-thinking-personality-type"
+  - "node_pattern_emotional-intelligence"
+  - "node_pattern_habit-engineering"
 contradicts: []
 policy_version: 1
 ---

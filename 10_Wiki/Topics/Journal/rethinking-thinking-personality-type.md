@@ -13,12 +13,10 @@ source_refs:
   - "src_20260423_8b76aafb"
 related:
   - "node_topic_hongsam-identity-core"
-  - "node_topic_love-and-relationships"
-  - "node_topic_emotional-intelligence"
-  - "node_topic_family-and-roots"
-  - "node_topic_art-and-music"
-  - "node_topic_expression"
+  - "node_domain_psychology"
   - "node_topic_mbti"
+  - "node_topic_rethinking-thinking-personality-type"
+  - "node_pattern_emotional-intelligence"
 contradicts: []
 policy_version: 1
 ---
