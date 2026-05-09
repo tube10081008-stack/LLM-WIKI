@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-09T05:42:54.492Z",
-  "node_count": 15,
+  "generated_at": "2026-05-09T05:47:53.789Z",
+  "node_count": 16,
   "entries": [
     {
       "node_id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -132,6 +132,16 @@
       "updated_at": "2026-04-16",
       "source_ref_count": 1,
       "summary": "초인은 시대적 통찰을 바탕으로 자신만의 질서를 창조하고 끝까지 완수하는 능동적 실천가이다."
+    },
+    {
+      "node_id": "node_topic_ownership-mindset-and-compensation-psychology",
+      "title": "주인의식과 보상심리의 재해석",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/ownership-mindset-and-compensation-psychology.md",
+      "status": "draft",
+      "updated_at": "2026-05-09",
+      "source_ref_count": 1,
+      "summary": "주인의식은 타인을 위한 희생이 아니라, 미래의 나를 위한 경영 감각의 선제적 훈련이자 주체성 확립의 과정이다."
     },
     {
       "node_id": "node_topic_pomodoro-technique-focus",

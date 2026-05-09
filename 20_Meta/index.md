@@ -1,6 +1,6 @@
 # Index
 
-- generated_at: 2026-05-09T05:42:54.492Z
+- generated_at: 2026-05-09T05:47:53.789Z
 
 - [[유튜브 알고리즘 마스터피스의 본질]] (project) -> 10_Wiki/Projects/Content-Systems/youtube-algorithm-masterpiece-essence.md
 - [[Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템]] (skill) -> 10_Wiki/Skills/Development/band-cover-ai-pipeline.md
@@ -15,5 +15,6 @@
 - [[대화의 마침표를 물음표로 바꾸는 지혜]] (topic) -> 10_Wiki/Topics/Journal/wisdom-of-dialogue-transition.md
 - [[정보과잉 시대의 인포매니아 현상과 정보 관리의 필요성]] (topic) -> 10_Wiki/Topics/Learnings/infomania-and-information-overload.md
 - [[초인(Übermensch)의 현대적 정의와 실천]] (topic) -> 10_Wiki/Topics/Learnings/modern-definition-of-ubermensch.md
+- [[주인의식과 보상심리의 재해석]] (topic) -> 10_Wiki/Topics/Learnings/ownership-mindset-and-compensation-psychology.md
 - [[뽀모도로 시간 관리법을 통한 집중력 향상]] (topic) -> 10_Wiki/Topics/Learnings/pomodoro-technique-focus.md
 - [[사소한 반복의 힘과 습관의 정의]] (topic) -> 10_Wiki/Topics/Learnings/power-of-small-habits.md

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-09T05:42:54.503Z",
-  "node_count": 21,
-  "edge_count": 75,
+  "generated_at": "2026-05-09T05:47:53.802Z",
+  "node_count": 22,
+  "edge_count": 78,
   "nodes": [
     {
       "id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -106,6 +106,14 @@
       "node_kind": "wiki",
       "node_type": "topic",
       "path": "10_Wiki/Topics/Learnings/modern-definition-of-ubermensch.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_topic_ownership-mindset-and-compensation-psychology",
+      "label": "주인의식과 보상심리의 재해석",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/ownership-mindset-and-compensation-psychology.md",
       "status": "draft"
     },
     {
@@ -493,6 +501,18 @@
       "weight": 1
     },
     {
+      "source": "node_topic_ownership-mindset-and-compensation-psychology",
+      "target": "cat_topics_learnings",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_ownership-mindset-and-compensation-psychology",
+      "target": "node_topic_untitled",
+      "relation": "related",
+      "weight": 1
+    },
+    {
       "source": "node_topic_pomodoro-technique-focus",
       "target": "cat_topics_learnings",
       "relation": "parent_category",
@@ -603,6 +623,12 @@
     {
       "source": "node_topic_modern-definition-of-ubermensch",
       "target": "node_topic_modern-definition-of-ubermensch",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_ownership-mindset-and-compensation-psychology",
+      "target": "node_topic_ownership-mindset-and-compensation-psychology",
       "relation": "wikilink",
       "weight": 1
     },
