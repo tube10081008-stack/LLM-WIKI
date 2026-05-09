@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-09T05:40:07.850Z",
-  "node_count": 14,
+  "generated_at": "2026-05-09T05:42:54.492Z",
+  "node_count": 15,
   "entries": [
     {
       "node_id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -102,6 +102,16 @@
       "updated_at": "2026-04-23",
       "source_ref_count": 1,
       "summary": "사고형(T) 성향은 감정의 결여가 아니라, 현실적인 문제 해결을 통해 타인의 실질적 생존과 안녕을 돕는 또 다른 형태의 배려다."
+    },
+    {
+      "node_id": "node_topic_wisdom-of-dialogue-transition",
+      "title": "대화의 마침표를 물음표로 바꾸는 지혜",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Journal/wisdom-of-dialogue-transition.md",
+      "status": "draft",
+      "updated_at": "2026-05-09",
+      "source_ref_count": 1,
+      "summary": "대화의 본질은 자신의 확신을 관철시키는 '단정'이 아니라, 상대의 세계를 존중하며 여지를 남기는 '질문'에 있다."
     },
     {
       "node_id": "node_topic_infomania-and-information-overload",
