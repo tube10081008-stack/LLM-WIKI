@@ -1,6 +1,6 @@
 # Index
 
-- generated_at: 2026-04-30T12:37:15.221Z
+- generated_at: 2026-05-09T05:36:37.038Z
 
 - [[유튜브 알고리즘 마스터피스의 본질]] (project) -> 10_Wiki/Projects/Content-Systems/youtube-algorithm-masterpiece-essence.md
 - [[Band Cover AI Pipeline: AI 기반 악기별 영상 프레임 선별 시스템]] (skill) -> 10_Wiki/Skills/Development/band-cover-ai-pipeline.md
@@ -13,3 +13,4 @@
 - [[홍삼의 자기 정의와 가치관]] (topic) -> 10_Wiki/Topics/Identity/hongsam-identity-core.md
 - [[T 성향에 대한 새로운 통찰: 생존과 배려의 관점]] (topic) -> 10_Wiki/Topics/Journal/rethinking-thinking-personality-type.md
 - [[초인(Übermensch)의 현대적 정의와 실천]] (topic) -> 10_Wiki/Topics/Learnings/modern-definition-of-ubermensch.md
+- [[뽀모도로 시간 관리법을 통한 집중력 향상]] (topic) -> 10_Wiki/Topics/Learnings/pomodoro-technique-focus.md

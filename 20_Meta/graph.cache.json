@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-30T12:37:15.234Z",
-  "node_count": 17,
-  "edge_count": 53,
+  "generated_at": "2026-05-09T05:36:37.053Z",
+  "node_count": 18,
+  "edge_count": 61,
   "nodes": [
     {
       "id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -90,6 +90,14 @@
       "node_kind": "wiki",
       "node_type": "topic",
       "path": "10_Wiki/Topics/Learnings/modern-definition-of-ubermensch.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_topic_pomodoro-technique-focus",
+      "label": "뽀모도로 시간 관리법을 통한 집중력 향상",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/pomodoro-technique-focus.md",
       "status": "draft"
     },
     {
@@ -372,7 +380,31 @@
     },
     {
       "source": "node_topic_rethinking-thinking-personality-type",
+      "target": "node_topic_hongsam-identity-core",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_rethinking-thinking-personality-type",
+      "target": "node_domain_psychology",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_rethinking-thinking-personality-type",
       "target": "node_topic_mbti",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_rethinking-thinking-personality-type",
+      "target": "node_topic_rethinking-thinking-personality-type",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_rethinking-thinking-personality-type",
+      "target": "node_pattern_emotional-intelligence",
       "relation": "related",
       "weight": 1
     },
@@ -385,6 +417,24 @@
     {
       "source": "node_topic_modern-definition-of-ubermensch",
       "target": "node_topic_untitled",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_pomodoro-technique-focus",
+      "target": "cat_topics_learnings",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_pomodoro-technique-focus",
+      "target": "node_topic_deep-work",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_pomodoro-technique-focus",
+      "target": "node_topic_motivation-psychology",
       "relation": "related",
       "weight": 1
     },
@@ -451,6 +501,12 @@
     {
       "source": "node_topic_modern-definition-of-ubermensch",
       "target": "node_topic_modern-definition-of-ubermensch",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_pomodoro-technique-focus",
+      "target": "node_topic_pomodoro-technique-focus",
       "relation": "wikilink",
       "weight": 1
     }

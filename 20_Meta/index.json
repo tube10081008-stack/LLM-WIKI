@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-30T12:37:15.221Z",
-  "node_count": 11,
+  "generated_at": "2026-05-09T05:36:37.038Z",
+  "node_count": 12,
   "entries": [
     {
       "node_id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -112,6 +112,16 @@
       "updated_at": "2026-04-16",
       "source_ref_count": 1,
       "summary": "초인은 시대적 통찰을 바탕으로 자신만의 질서를 창조하고 끝까지 완수하는 능동적 실천가이다."
+    },
+    {
+      "node_id": "node_topic_pomodoro-technique-focus",
+      "title": "뽀모도로 시간 관리법을 통한 집중력 향상",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/pomodoro-technique-focus.md",
+      "status": "draft",
+      "updated_at": "2026-05-09",
+      "source_ref_count": 1,
+      "summary": "집중력은 의지력의 산물이 아니라, 시간을 짧게 통제함으로써 시작의 진입장벽을 낮추는 구조적 설계에서 비롯된다."
     }
   ]
 }
