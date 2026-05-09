@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-09T05:36:37.038Z",
-  "node_count": 12,
+  "generated_at": "2026-05-09T05:38:28.729Z",
+  "node_count": 13,
   "entries": [
     {
       "node_id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -102,6 +102,16 @@
       "updated_at": "2026-04-23",
       "source_ref_count": 1,
       "summary": "사고형(T) 성향은 감정의 결여가 아니라, 현실적인 문제 해결을 통해 타인의 실질적 생존과 안녕을 돕는 또 다른 형태의 배려다."
+    },
+    {
+      "node_id": "node_topic_infomania-and-information-overload",
+      "title": "정보과잉 시대의 인포매니아 현상과 정보 관리의 필요성",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/infomania-and-information-overload.md",
+      "status": "draft",
+      "updated_at": "2026-05-09",
+      "source_ref_count": 1,
+      "summary": "무분별한 정보 수집은 지식이 아니라 강박일 뿐이며, 정보 과잉 시대에서 진정한 경쟁력은 수집이 아닌 필터링과 체계적 정리에 있다."
     },
     {
       "node_id": "node_topic_modern-definition-of-ubermensch",

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-09T05:36:37.053Z",
-  "node_count": 18,
-  "edge_count": 61,
+  "generated_at": "2026-05-09T05:38:28.741Z",
+  "node_count": 19,
+  "edge_count": 67,
   "nodes": [
     {
       "id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -82,6 +82,14 @@
       "node_kind": "wiki",
       "node_type": "topic",
       "path": "10_Wiki/Topics/Journal/rethinking-thinking-personality-type.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_topic_infomania-and-information-overload",
+      "label": "정보과잉 시대의 인포매니아 현상과 정보 관리의 필요성",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/infomania-and-information-overload.md",
       "status": "draft"
     },
     {
@@ -409,6 +417,36 @@
       "weight": 1
     },
     {
+      "source": "node_topic_infomania-and-information-overload",
+      "target": "cat_topics_learnings",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_infomania-and-information-overload",
+      "target": "node_topic_digital-literacy",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_infomania-and-information-overload",
+      "target": "node_topic_second-brain-methodology",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_infomania-and-information-overload",
+      "target": "node_topic_cognitive-load-theory",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_infomania-and-information-overload",
+      "target": "node_topic_second-brain",
+      "relation": "related",
+      "weight": 1
+    },
+    {
       "source": "node_topic_modern-definition-of-ubermensch",
       "target": "cat_topics_learnings",
       "relation": "parent_category",
@@ -495,6 +533,12 @@
     {
       "source": "node_topic_rethinking-thinking-personality-type",
       "target": "node_topic_rethinking-thinking-personality-type",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_infomania-and-information-overload",
+      "target": "node_topic_infomania-and-information-overload",
       "relation": "wikilink",
       "weight": 1
     },
