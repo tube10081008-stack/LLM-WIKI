@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-09T05:38:28.741Z",
-  "node_count": 19,
-  "edge_count": 67,
+  "generated_at": "2026-05-09T05:40:07.863Z",
+  "node_count": 20,
+  "edge_count": 71,
   "nodes": [
     {
       "id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -106,6 +106,14 @@
       "node_kind": "wiki",
       "node_type": "topic",
       "path": "10_Wiki/Topics/Learnings/pomodoro-technique-focus.md",
+      "status": "draft"
+    },
+    {
+      "id": "node_topic_power-of-small-habits",
+      "label": "사소한 반복의 힘과 습관의 정의",
+      "node_kind": "wiki",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/power-of-small-habits.md",
       "status": "draft"
     },
     {
@@ -477,6 +485,24 @@
       "weight": 1
     },
     {
+      "source": "node_topic_power-of-small-habits",
+      "target": "cat_topics_learnings",
+      "relation": "parent_category",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_power-of-small-habits",
+      "target": "node_topic_atomic-habits",
+      "relation": "related",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_power-of-small-habits",
+      "target": "node_topic_discipline-and-freedom",
+      "relation": "related",
+      "weight": 1
+    },
+    {
       "source": "node_project_youtube-algorithm-masterpiece-essence",
       "target": "node_project_youtube-algorithm-masterpiece-essence",
       "relation": "wikilink",
@@ -551,6 +577,12 @@
     {
       "source": "node_topic_pomodoro-technique-focus",
       "target": "node_topic_pomodoro-technique-focus",
+      "relation": "wikilink",
+      "weight": 1
+    },
+    {
+      "source": "node_topic_power-of-small-habits",
+      "target": "node_topic_power-of-small-habits",
       "relation": "wikilink",
       "weight": 1
     }

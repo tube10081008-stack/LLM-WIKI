@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-09T05:38:28.729Z",
-  "node_count": 13,
+  "generated_at": "2026-05-09T05:40:07.850Z",
+  "node_count": 14,
   "entries": [
     {
       "node_id": "node_project_youtube-algorithm-masterpiece-essence",
@@ -132,6 +132,16 @@
       "updated_at": "2026-05-09",
       "source_ref_count": 1,
       "summary": "집중력은 의지력의 산물이 아니라, 시간을 짧게 통제함으로써 시작의 진입장벽을 낮추는 구조적 설계에서 비롯된다."
+    },
+    {
+      "node_id": "node_topic_power-of-small-habits",
+      "title": "사소한 반복의 힘과 습관의 정의",
+      "node_type": "topic",
+      "path": "10_Wiki/Topics/Learnings/power-of-small-habits.md",
+      "status": "draft",
+      "updated_at": "2026-05-09",
+      "source_ref_count": 1,
+      "summary": "습관은 단순한 반복을 넘어 목적을 달성하기 위한 가장 견고한 기초이자, 자아를 형성하는 고정된 반응 양식이다."
     }
   ]
 }
